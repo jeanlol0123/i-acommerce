@@ -1,0 +1,8 @@
+{
+  "name": "IAcommerce",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "a29f8adf"
+}
