@@ -3,11 +3,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Message } from '../models/message.model';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-chat',
+  templateUrl: 'chat.page.html',
+  styleUrls: ['chat.page.scss']
 })
-export class Tab3Page {
+export class ChatPage {
 
   messages: Message[] = [
     {sender: 'me', content: 'Hola como estas el dia de hoy?'},
