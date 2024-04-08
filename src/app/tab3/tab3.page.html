@@ -1,17 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      IAchat
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-item lines="none" [ngClass]="{'bot': m.sender !== 'me'}" class="chat-item" *ngFor="let m of messages; index as i">
+    <ion-badge slot="start" [color]="m.sender == 'me' ? 'success' : 'tertiary' " mode="md">
+      <ion-icon class="chat-icon" [src]="m.sender =='me' ? 'assets/user.svg' : 'assets/bot.svg'"></ion-icon>
+    </ion-badge>
+    <ion-label class="ion-text-wrap">
+      {{m.content}}
+      <ion-spinner *ngIf="loading && (i+1 == messages.length)" color="tertiary" name="dots"></ion-spinner>
+    </ion-label>
+  </ion-item>
+
+
 </ion-content>
+
+<ion-footer class="ion-padding">
+
+
+  <form [formGroup]="form" (ngSubmit)="submit()" (keyup.enter)="submit()">
+
+    <ion-item class="text-box-item">
+      <ion-textarea formControlName="prompt" auto-grow="true" placeholder="Escribe un mensaje a tu IAchat..."></ion-textarea>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon  name="send"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+  </form>
+
+
+  
+</ion-footer>

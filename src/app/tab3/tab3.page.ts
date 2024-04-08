@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,62 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
+  messages: Message[] = [
+    {sender: 'me', content: 'Hola como estas el dia de hoy?'},
+    {sender: 'bot', content: 'Estoy muy bien, y tu?'},
+
+  ];
+
+  form = new FormGroup({
+    prompt: new FormControl('')
+  })
+
+  loading: boolean = false;
+
   constructor() {}
+
+
+  submit() {
+    console.log(this.form.value);
+
+    let prompt = this.form.value.prompt as string;
+
+    // Mensaje de usuario
+    let userMsg: Message = {sender: 'me', content: prompt}
+    this.messages.push(userMsg);
+
+    // Mensaje de usuario
+    let botMsg: Message = {sender: 'bot', content: ''}
+    this.messages.push(botMsg);
+  
+    this.form.reset();
+    this.form.disable();
+
+    this.loading = true;
+
+    setTimeout(() => {
+      this.loading = false;
+      this.typeText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec venenatis ipsum. Ut iaculis diam quis magna aliquam, ac molestie enim accumsan. Nam non massa ultricies, pretium arcu eget, cursus massa. Sed vestibulum ultrices tortor quis vulputate. Phasellus rhoncus scelerisque tellus, eu maximus mi scelerisque pellentesque. Morbi tempor nisi sed quam malesuada, id viverra libero vehicula. Nulla consectetur maximus urna ac vestibulum. Donec vehicula tellus ac erat congue, ac facilisis tortor pulvinar. Suspendisse hendrerit viverra metus, sed convallis felis tempus id. Sed id auctor purus. Donec vitae neque malesuada, egestas dolor nec, hendrerit lorem. Morbi neque turpis, sollicitudin laoreet orci.')
+
+      this.form.enable();
+    },2000)
+  }
+
+  typeText(text: string) {
+    let textindex = 0;
+    let messagesLastIndex = this.messages.length - 1;
+    let interval = setInterval(() =>{
+
+      if (textindex >= text.length){
+        this.messages[messagesLastIndex].content += text.charAt(textindex);
+        textindex++;
+      }else{
+        clearInterval(interval);
+      }
+    }, 50) 
+
+  }
+  
+    
 
 }
