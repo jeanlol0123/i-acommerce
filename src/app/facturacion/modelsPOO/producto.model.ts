@@ -1,10 +1,15 @@
 export class producto{
-    Descripcion : string;
-    Cantidad : number;
-    Precio : number;
-    Descuento: Float32Array;
+    nombre : string;
+    cantidad: number;
+    precio : number;
+    descuento: number;
     importe : number;
 
-    constructor(){
-    }
+    constructor(nombre: string, cantidad: number, precio: number, descuento: number, importe: number) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descuento = descuento;
+        this.importe = importe;
+      }
 }
