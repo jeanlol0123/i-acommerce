@@ -35,8 +35,6 @@ export class Facturacionform2Page implements OnInit {
 
       const Producto = new producto(nombre,cantidad,precio,descuento,importe);
       console.log(Producto);
-
-
     }
     this.formData.reset();
   }
