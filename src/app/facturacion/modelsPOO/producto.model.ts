@@ -11,5 +11,10 @@ export class producto{
         this.precio = precio;
         this.descuento = descuento;
         this.importe = importe;
-      }
+    }
+
+    total(precio: number, cantidad: number, descuento:number,importe:number) {
+      return [(precio * cantidad) * (1 - descuento) + importe];
+    }
+ 
 }

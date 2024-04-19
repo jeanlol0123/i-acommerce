@@ -1,30 +1,25 @@
-import { metodoPago } from "../modelsPOO/pago.models";
-import { RemitenteDestinatario } from "../modelsPOO/remitenteDestinatario.model";
-import { producto } from "../modelsPOO/producto.model";
+import { Injectable } from '@angular/core';
+import { Factura } from '../modelsPOO/factura.models';
+import { metodoPago } from '../modelsPOO/pago.models';
+import { RemitenteDestinatario } from '../modelsPOO/remitenteDestinatario.model';
+import { producto } from '../modelsPOO/producto.model';
 
+@Injectable({
+  providedIn: 'root'
+})
+export class FacturaService {
+  facturas: Factura[] = [];
 
-export class DataService {
-    static idCounter: number = 0; 
-    id: number;
-    remitente: RemitenteDestinatario;
-    destinatario: RemitenteDestinatario;
-    listaProductos: producto[];
-    pago: metodoPago;
-  
-    constructor(remitente: RemitenteDestinatario, destinatario: RemitenteDestinatario, listaProductos: producto[], method: metodoPago) {
-      this.id = DataService.getNextId(); 
-      this.remitente = remitente;
-      this.destinatario = destinatario;
-      this.listaProductos = listaProductos;
-      this.pago = method;
-    }
-  
-    getRemitente(id:number) {
-      return this.remitente;
-    }
-  
-    
-    private static getNextId(): number {
-      return DataService.idCounter++;
-    }
+  constructor() {}
+
+  agregarFactura(remitente: RemitenteDestinatario, destinatario: RemitenteDestinatario, productos: producto[], metodoPago: metodoPago) {
+    const id = this.facturas.length + 1; 
+    const nuevaFactura = new Factura(id, remitente, destinatario, productos, metodoPago);
+    this.facturas.push(nuevaFactura);
   }
+
+  obtenerFacturaPorId(id: number): Factura | undefined {
+    return this.facturas.find(factura => factura.id === id);
+  }
+
+}
