@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'facturacionform3',
     loadChildren: () => import('./facturacionform3/facturacionform3.module').then( m => m.Facturacionform3PageModule)
+  },
+  {
+    path: 'verificacion',
+    loadChildren: () => import('./verificacion/verificacion.module').then( m => m.VerificacionPageModule)
   }
 
 ];

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { metodoPago } from '../modelsPOO/pago.models';
+
 @Component({
   selector: 'app-facturacionform3',
   templateUrl: './facturacionform3.page.html',
@@ -28,7 +29,10 @@ export class Facturacionform3Page implements OnInit {
 
     const method = new metodoPago(metodo,nombreBanco,nCuenta);
 
-    console.log(method);
+    this.router.navigate(['facturacion/verificacion']);
+
+
+
   }
 
 }
