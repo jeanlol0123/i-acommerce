@@ -29,7 +29,7 @@ export class Facturacionform3Page implements OnInit {
 
     const method = new metodoPago(metodo,nombreBanco,nCuenta);
 
-    this.router.navigate(['facturacion/verificacion']);
+    this.router.navigate(['tabs/facturacion/verificacion']);
 
 
 

@@ -51,7 +51,7 @@ export class FacturacionPage implements OnInit {
     }
 
   form2(){
-    this.router.navigate(['facturacion/facturacionform2']);
+    this.router.navigate(['tabs/facturacion/facturacionform2']);
 
   }
     
