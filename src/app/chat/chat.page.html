@@ -9,12 +9,12 @@
 <ion-content [fullscreen]="true">
 
   <ion-item lines="none" [ngClass]="{'bot': m.sender !== 'me'}" class="chat-item" *ngFor="let m of messages; index as i">
-    <ion-badge slot="start" [color]="m.sender == 'me' ? 'success' : 'tertiary' " mode="md">
-      <ion-icon class="chat-icon" [src]="m.sender =='me' ? 'assets/user.svg' : 'assets/bot.svg'"></ion-icon>
+    <ion-badge slot="start" [color]="m.sender === 'me' ? 'success' : 'tertiary' " mode="md">
+      <ion-icon class="chat-icon" [src]="m.sender ==='me' ? 'assets/user.svg' : 'assets/bot.svg'"></ion-icon>
     </ion-badge>
     <ion-label class="ion-text-wrap">
       {{m.content}}
-      <ion-spinner *ngIf="loading && (i+1 == messages.length)" color="tertiary" name="dots"></ion-spinner>
+      <ion-spinner *ngIf="loading && (i+1 === messages.length)" color="tertiary" name="dots"></ion-spinner>
     </ion-label>
   </ion-item>
 
@@ -28,8 +28,9 @@
 
     <ion-item class="text-box-item">
       <ion-textarea formControlName="prompt" auto-grow="true" placeholder="Escribe un mensaje a tu IAchat..."></ion-textarea>
+      
       <ion-buttons slot="end">
-        <ion-button>
+        <ion-button >
           <ion-icon  name="send"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -37,6 +38,4 @@
 
   </form>
 
-
-  
 </ion-footer>

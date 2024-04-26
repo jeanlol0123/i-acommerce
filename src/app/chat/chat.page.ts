@@ -12,7 +12,6 @@ export class ChatPage {
   messages: Message[] = [
     {sender: 'me', content: 'Hola como estas el dia de hoy?'},
     {sender: 'bot', content: 'Estoy muy bien, y tu?'},
-
   ];
 
   form = new FormGroup({
@@ -33,7 +32,7 @@ export class ChatPage {
     let userMsg: Message = {sender: 'me', content: prompt}
     this.messages.push(userMsg);
 
-    // Mensaje de usuario
+    // Mensaje de bot
     let botMsg: Message = {sender: 'bot', content: ''}
     this.messages.push(botMsg);
   
@@ -44,27 +43,23 @@ export class ChatPage {
 
     setTimeout(() => {
       this.loading = false;
-      this.typeText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec venenatis ipsum. Ut iaculis diam quis magna aliquam, ac molestie enim accumsan. Nam non massa ultricies, pretium arcu eget, cursus massa. Sed vestibulum ultrices tortor quis vulputate. Phasellus rhoncus scelerisque tellus, eu maximus mi scelerisque pellentesque. Morbi tempor nisi sed quam malesuada, id viverra libero vehicula. Nulla consectetur maximus urna ac vestibulum. Donec vehicula tellus ac erat congue, ac facilisis tortor pulvinar. Suspendisse hendrerit viverra metus, sed convallis felis tempus id. Sed id auctor purus. Donec vitae neque malesuada, egestas dolor nec, hendrerit lorem. Morbi neque turpis, sollicitudin laoreet orci.')
+      this.typeText('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
       this.form.enable();
-    },2000)
+    }, 2000);
   }
 
   typeText(text: string) {
-    let textindex = 0;
+    let textIndex = 0;
     let messagesLastIndex = this.messages.length - 1;
-    let interval = setInterval(() =>{
+    let interval = setInterval(() => {
 
-      if (textindex >= text.length){
-        this.messages[messagesLastIndex].content += text.charAt(textindex);
-        textindex++;
-      }else{
+      if (textIndex < text.length) {
+        this.messages[messagesLastIndex].content += text.charAt(textIndex);
+        textIndex++;
+      } else {
         clearInterval(interval);
       }
-    }, 50) 
-
+    }, 50); 
   }
-  
-    
-
 }
