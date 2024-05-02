@@ -1,0 +1,97 @@
+[33mcommit d0db386c9ffb3607fce952a5e1e1297172dee9ff[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: daab546 6acb3c2
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Thu May 2 11:50:25 2024 -0500
+
+    Merge branch 'master'
+
+[33mcommit 6acb3c2d17dad7129ecc64b0e4920f78119e4e4d[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Thu May 2 11:43:33 2024 -0500
+
+    Implementacion de la primera api con usuarios
+
+[33mcommit daab54645708520b8bc8abc37dd7c10d7551dd58[m
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Fri Apr 26 13:30:52 2024 -0500
+
+    se traduce el codigo de python a node.js para la conexion del servidor, funciona pero toca ajustar la logica para que apunte a la aplicacion de ionic
+
+[33mcommit 7487036933e22506ea84037fb9b7a0d7e05fde3f[m
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Fri Apr 26 12:32:32 2024 -0500
+
+    Se integra la carpeta de server, se trabaja en la creacion del servidor de openAI
+
+[33mcommit 5ad0664172bd92e7c536cbf46f6a80248b6eb815[m
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Fri Apr 26 11:31:25 2024 -0500
+
+    arreglo "lorem"
+
+[33mcommit 85db2f80da939a887e467d25c447c59c418cf018[m
+Merge: a098d80 ba9f019
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Fri Apr 26 11:30:54 2024 -0500
+
+    arrehlo
+
+[33mcommit a098d804a9789cd55e8452ff929b97cb239ff234[m
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Fri Apr 26 11:26:12 2024 -0500
+
+    se arregla
+
+[33mcommit ba9f019c258f54caae3ea66ddde1c85cd69da1c3[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Fri Apr 26 11:20:24 2024 -0500
+
+    "Se arreglo el lorem ipsum xdxdxdxd"
+
+[33mcommit 6befc524dd21e18d4ba12e2a28820d767e7486ee[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Sun Apr 21 18:14:55 2024 -0500
+
+    Se arreglo el bug de que el navbar de abajo desaparecia al enrutar los otrs forms
+
+[33mcommit c78ffbea78222c1b1874aaac006d623f4a56d99c[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Sun Apr 21 17:58:46 2024 -0500
+
+    Se realizo la pagina de verificacion de datos, alli se renderizara los datos de toda la factura, y se agregara un boton el cual generara, un pdf con el nombre del id de la factura
+
+[33mcommit 662bd5f8706f884e4cf302b4b029748c62280ec1[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Fri Apr 19 15:45:01 2024 -0500
+
+    Se arreglo un Bug que hacia que la pagina PDFs redirigiera a la pagina de facturacion, instalacion de jspdf, y ya se implemento para descargar archivos PDF
+
+[33mcommit ba3702f3edd6f71f94d43c5121d6133f9e93f983[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Tue Apr 16 10:27:54 2024 -0500
+
+    Ya se terminaron de crear todos los forms, falta fixear que al redirigir en estos, cargue la barrita de abajo de siempre, tambien se elimino una clase, y se implemento un servicio de Data Service el cual alberga la informacion de los 3 forms juntos.Los metodos de procentaje se agregaran en cada respectiva clase.
+
+[33mcommit 9b6a790016917b35cab595358dbed0c268395bc5[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Mon Apr 15 11:39:25 2024 -0500
+
+    Se renderizaron las 3 paginas, con los botones, se arreglo el bug de el bojeto vacio, y falta realizar la logica de la lista, y realizar los otros 3 forms con sus respectivas clases
+
+[33mcommit 79179c82ebe108284d12ddda0a1828f108846890[m
+Author: Disruptor <davidsantiagojimenez16@gmail.com>
+Date:   Mon Apr 8 12:33:59 2024 -0500
+
+    Cambio de los nombres de las carpteas tabs a, chat,pdf,facturacion. Tambien se empezo con la creacion de clases para manejar el form de la pagina de Facturacion, se esta intentando tomar los objetos del form y aplicarlos al objeto creado por la clase(No lo hace, llena espacios en blanco).
+
+[33mcommit e297ddbbd54a38ca13cfc5f796932e8ad96c0bab[m
+Author: Jeanlol <jeanpaulol0123@gmail.com>
+Date:   Sun Apr 7 23:30:19 2024 -0500
+
+    Creacion del chat, error al momento de probar el lorem ipsum
+
+[33mcommit 288566b2894836ae3becb3425c6a2246756e89d1[m
+Author: jeanlol0123 <jeanpaulol0123@gmail.com>
+Date:   Sun Apr 7 23:35:43 2024 +0000
+
+    Initial commit
