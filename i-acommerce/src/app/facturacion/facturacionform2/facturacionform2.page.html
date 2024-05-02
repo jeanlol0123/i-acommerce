@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Facturacion Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-toolbar>
+      <ion-title size="large">Datos del Producto</ion-title>
+
+      <form [formGroup]="formData">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Nombre Producto</ion-label>
+            <ion-input placeholder="Nombre Producto" formControlName="Nombre" type="text"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label position="floating">Cantidad</ion-label>
+            <ion-input placeholder="Cantidad" formControlName="Cantidad" type="number"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input placeholder="Precio" formControlName="Precio" type="number"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label position="floating">Descuento</ion-label>
+            <ion-input placeholder="Descuento" formControlName="Descuento" type="number"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label position="floating">Impuesto</ion-label>
+            <ion-input placeholder="Impuesto" formControlName="Impuesto" type="number"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Importe</ion-label>
+            <ion-input placeholder="Importe" formControlName="Importe" type="number"></ion-input>
+          </ion-item>
+
+          <ion-button (click)="agregarProductos()" expand="block">Agregar Producto</ion-button>
+          <ion-button (click)="form3()" expand="block">Siguiente</ion-button>
+        </ion-list>
+      </form>
+    </ion-toolbar>
+</ion-content>
