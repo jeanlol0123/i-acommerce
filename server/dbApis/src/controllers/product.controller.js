@@ -1,19 +1,70 @@
-export const getProduct = (req, res) => {
-    res.send('Obteniendo usuarios');
+import {pool} from '../databases/dbConnection.js';
+
+export const getProducts = async (req, res) => {
+    try{
+        const [rows] = await pool.query('SELECT * FROM producto');
+        res.status(200).json(rows);
+    } catch(err){
+        res.status(500).json({ message: "Ocurrio un error al buscar productos",
+        error: err.message});   
+    }
+}
+export const getSingleProduct = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const [rows] = await pool.query('SELECT * FROM producto WHERE id = ?', id);
+        
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "No se ha encontrado el producto" });
+        }
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: "Ocurrio un error al buscar el producto",error:error.message });
+    }
 }
 
-export const getSingleProduct = (req, res) => {
-    res.send('Obteniendo un usuario');  
+export const postProduct  =  async (req, res) => {
+    try{
+        const {nombre, costo, stock} = req.body
+        const [rows] = await pool.query('INSERT INTO producto (nombre,costo,stock) VALUES (?,?,?)',
+        [nombre,costo,stock]);
+        res.status(201).send({
+            id: rows.insertId,
+            nombre,
+            costo,
+            stock
+        });
+    } catch(error){
+        res.status(500).json({ message: "Ocurrio un error al crear el producto",error:error.message });
+    }
+
 }
 
-export const postProduct  = (req, res) => {
-    res.send('Creando usuarios');
+export const deleteProduct = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const [rows] = await pool.query('DELETE FROM producto WHERE id = ?', id);
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "No se ha encontrado el producto." });
+        }else{
+            return res.status(200).json({ message: "Se ha eliminado el producto." });
+        }
+    } catch(error){
+        res.status(500).json({ message: "Ocurrió un error al eliminar el producto",error:error.message });        
+    }
+
 }
 
-export const deleteProduct = (req, res) => {
-    res.send('Borrando Usuarios');
-}
+export const updateProduct = async(req, res) => {
+    try{
+        const id = req.params.id;
+        const {nombre, costo, stock} = req.body
+        const [result] = await pool.query('UPDATE producto SET nombre =?, costo =?, stock =? WHERE id =?',
+        [nombre,costo,stock,id]);
+        const [rows] = await pool.query('SELECT * FROM producto WHERE id = ?', id);
+        res.status(200).json(rows);
+    } catch(error){
+        res.status(500).json({ message: "Ocurrio un error al actualizar un producto",error:error.message });
+    }
 
-export const updateProduct = (req, res) => {
-    res.send('Actualizando Usuarios');
 }
