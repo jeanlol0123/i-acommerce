@@ -1,5 +1,7 @@
 import {pool} from '../databases/dbConnection.js';
 
+
+
 export const getPersons = async (req, res) => {
     try{
         const [rows] = await pool.query('SELECT * FROM persona');
@@ -22,6 +24,7 @@ export const getSinglePerson = async (req, res) => {
         res.status(500).json({ message: "Ocurrió un error al buscar el usuario.",error:error.message });
     }
 }
+
 
 export const postPerson  =  async (req, res) => {
     try{
