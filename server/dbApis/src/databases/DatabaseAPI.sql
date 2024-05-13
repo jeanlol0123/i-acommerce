@@ -44,11 +44,3 @@ CREATE TABLE `PedidoProducto` (
   `cantidad` INT,
   FOREIGN KEY (`idProducto`) REFERENCES `Producto` (`id`)
 );
-
-INSERT INTO `persona` (nombre,apellido,direccion,telefono,correo) VALUES (
-  ?.
-  ?,
-  ?,
-  ?,
-  ?
-)

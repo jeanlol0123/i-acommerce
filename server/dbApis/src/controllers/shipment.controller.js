@@ -1,5 +1,5 @@
 import { pool } from "../databases/dbConnection.js";
-import { userExists } from "../Utilities/UsersUtilities.js";
+import { userExists } from "../Utilities/Utilities.js";
 
 export const getShipments = async (req, res) => {
   try {
@@ -109,7 +109,7 @@ export const updateShipment = async (req, res) => {
             [parseInt(idRem), parseInt(idDest), id]
           );
           const [rows] = await pool.query(
-            "SELECT * FROM relacionesenvio WHERE id = ?",
+            "SELECT * FROM relacionesenvio WHERE id = ?",                            
             id
           );
           res.status(200).json(rows);
