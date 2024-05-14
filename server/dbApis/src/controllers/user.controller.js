@@ -28,16 +28,17 @@ export const getSinglePerson = async (req, res) => {
 
 export const postPerson  =  async (req, res) => {
     try{
-        const {nombre,apellido,direccion,telefono,correo} = req.body
-        const [rows] = await pool.query('INSERT INTO persona (nombre,apellido,direccion,telefono,correo) VALUES (?,?,?,?,?)',
-        [nombre,apellido,direccion,telefono,correo]);
+        const {nombre,apellido,direccion,telefono,correo,ciudad} = req.body
+        const [rows] = await pool.query('INSERT INTO persona (nombre,apellido,direccion,telefono,correo,ciudad) VALUES (?,?,?,?,?,?)',
+        [nombre,apellido,direccion,telefono,correo,ciudad]);
         res.status(201).send({
             id: rows.insertId,
             nombre,
             apellido,
             direccion,
             telefono,
-            correo
+            correo,
+            ciudad
         });
     } catch(error){
         res.status(500).json({ message: "Ocurrió un error al crear el usuario",error:error.message });
@@ -63,9 +64,9 @@ export const deletePersons = async (req, res) => {
 export const updatePerson = async(req, res) => {
     try{
         const id = req.params.id;
-        const {nombre,apellido,direccion,telefono,correo} = req.body
-        const [result] = await pool.query('UPDATE persona SET nombre =?, apellido =?, direccion =?, telefono =?, correo =? WHERE id =?',
-        [nombre,apellido,direccion,telefono,correo,id]);
+        const {nombre,apellido,direccion,telefono,correo,ciudad} = req.body
+        const [result] = await pool.query('UPDATE persona SET nombre =?, apellido =?, direccion =?, telefono =?, correo =?, ciudad =? WHERE id =?',
+        [nombre,apellido,direccion,telefono,correo,ciudad,id]);
         const [rows] = await pool.query('SELECT * FROM persona WHERE id = ?', id);
         res.status(200).json(rows);
     } catch(error){

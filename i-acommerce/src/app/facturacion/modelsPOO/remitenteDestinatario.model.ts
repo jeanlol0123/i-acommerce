@@ -1,22 +1,26 @@
 export class RemitenteDestinatario {
     private nombre: string;
+    private apellido:string;
     private direccion: string;
     private ciudad: string;
     private telefono: string;
     private correo: string;
-    private esRemitente: boolean;
   
-    constructor(nombre: string, direccion: string, ciudad: string, telefono: string, correo: string, remitente: boolean) {
+    constructor(nombre: string,apellido:string, direccion: string, ciudad: string, telefono: string, correo: string) {
       this.nombre = nombre;
+      this.apellido = apellido;
       this.direccion = direccion;
       this.ciudad = ciudad;
       this.telefono = telefono;
       this.correo = correo;
-      this.esRemitente = remitente;
     }
   
     get gnombre(): string {
       return this.nombre;
+    }
+
+    get gapellido():string{
+      return this.apellido;
     }
   
     get gdireccion(): string {
@@ -37,8 +41,28 @@ export class RemitenteDestinatario {
       return this.correo;
     }
 
-  
-    get gesRemitente(): boolean {
-      return this.esRemitente;
+    set snombre(nombre:string){
+      this.nombre = nombre;
     }
+
+    
+  set sapellido(apellido: string) {
+    this.apellido = apellido;
+  }
+
+  set sdireccion(direccion: string) {
+    this.direccion = direccion;
+  }
+
+  set sciudad(ciudad: string) {
+    this.ciudad = ciudad;
+  }
+
+  set stelefono(telefono: string) {
+    this.telefono = telefono;
+  }
+
+  set scorreo(correo: string) {
+    this.correo = correo;
+  }
   }

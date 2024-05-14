@@ -1,5 +1,6 @@
 import express from 'express';
 import {PORT} from './config.js';
+import cors from 'cors';
 import userRoutes from './src/routes/person.routes.js';
 import productRoutes from './src/routes/product.routes.js';
 import shipmentRoutes from './src/routes/shipment.routes.js';
@@ -8,6 +9,11 @@ import orderDetailRoutes from './src/routes/orderDetail.routes.js';
 import OrderDetailsInvoice from './src/routes/orderDetailInvoice.routes.js';
 import ping from './src/routes/ping.js';
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:8100'
+}));
+  
 
 app.use(express.json())
 app.use(ping);

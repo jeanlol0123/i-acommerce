@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ContadorService } from './services/contador.service';
+import { ContadorService } from '../services/counter.service';
 import { RemitenteDestinatario } from './modelsPOO/remitenteDestinatario.model';
 import { Router } from '@angular/router';
+import { postUser } from './Requests/user.request';
+
 @Component({
   selector: 'app-facturacion',
   templateUrl: './facturacion.page.html',
@@ -18,6 +20,7 @@ export class FacturacionPage implements OnInit {
   ngOnInit() {
     this.formData = new FormGroup({
       Nombre: new FormControl(),
+      Apellido: new FormControl(),
       Direccion: new FormControl(),
       Ciudad: new FormControl(),
       Telefono: new FormControl(),
@@ -31,20 +34,26 @@ export class FacturacionPage implements OnInit {
         this.contadorService.aumentarContador();
 
         const nombre:string = this.formData.get('Nombre')?.value;
+        const apellido:string = this.formData.get('Apellido')?.value;
         const direccion:string = this.formData.get('Direccion')?.value;
         const ciudad:string = this.formData.get('Ciudad')?.value;
         const telefono:string = this.formData.get('Telefono')?.value;
         const correo:string = this.formData.get('Correo')?.value;
         console.log(telefono);
         if(this.contadorService.obtenerContador() == 0 ){
-          const remitente = new RemitenteDestinatario(nombre, direccion, ciudad, telefono, correo, true); 
-          console.log(remitente);   
-          this.formData.reset();  
+          const remitente = new RemitenteDestinatario(nombre,apellido,direccion, ciudad, telefono, correo); 
+          try{
+            let response = postUser(remitente);
+            console.log(response);
+          } catch(error){
+            console.log(Error);
+          }
+
+
         }
         else{
-          console.log("Valor del Destinatario");
-          const destinatario = new RemitenteDestinatario(nombre, direccion, ciudad, telefono, correo, true); 
-          console.log(destinatario);  
+          const destinatario = new RemitenteDestinatario(nombre, apellido,direccion, ciudad, telefono, correo); 
+          let response = postUser(destinatario);
           this.formData.reset();  
         }
       }
