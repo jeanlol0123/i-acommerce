@@ -33,3 +33,31 @@ export async function productExist(id){
         return false;
     }
 }
+
+export async function facturaExist(id){
+    try {
+        id = parseInt(id);
+        if (isNaN(id)) {
+            throw new Error("Invalid id");
+        }
+        const [rows] = await pool.query('SELECT * FROM factura WHERE id = ?', [id]);
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error al verificar si existe la factura:", error);
+        return false;
+    }
+}
+
+export async function pedidoProductoExist(id){
+    try {
+        id = parseInt(id);
+        if (isNaN(id)) {
+            throw new Error("Invalid id");
+        }
+        const [rows] = await pool.query('SELECT * FROM pedidoproducto WHERE id = ?', [id]);
+        return rows.length > 0;
+    } catch (error) {
+        console.error("Error al verificar si existe el pedido de producto:", error);
+        return false;
+    }
+}
