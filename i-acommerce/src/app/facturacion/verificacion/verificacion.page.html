@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>verificacion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Verificacion de Informacion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Datos de Facturaciones</ion-card-title>
+      <ion-card-subtitle>Pedido : #4324234</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-label>Remitente</ion-label>
+          <ion-label>
+            Nombre: Juan Pérez<br>
+            Dirección: Calle Principal 123<br>
+            Ciudad: Ciudad de Ejemplo<br>
+            Teléfono: 123-456-7890<br>
+            Correo: santiago&#64;example.com
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="person" slot="start"></ion-icon>
+          <ion-label>Destinatario</ion-label>
+          <ion-label>
+            Nombre: María Gómez<br>
+            Dirección: Calle Secundaria 456<br>
+            Ciudad: Otra Ciudad<br>
+            Teléfono: 987-654-3210<br>
+            Correo: otro&#64;example.com
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="bag" slot="start"></ion-icon>
+          <ion-label>Productos</ion-label>
+          <ion-label>
+            <!-- Aquí se mostraría la lista de productos -->
+            Producto 1: Camiseta - Cantidad: 2 - Precio: $20<br>
+            Producto 2: Pantalón - Cantidad: 1 - Precio: $30<br>
+            Producto 3: Zapatos - Cantidad: 1 - Precio: $50<br>
+            Total: 80$
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-icon name="card" slot="start"></ion-icon>
+          <ion-label>Método de Pago</ion-label>
+          <ion-label>
+            Método: Tarjeta de Crédito<br>
+            Banco: Banco Ejemplo<br>
+            Número de Cuenta: 1234567890123456
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
