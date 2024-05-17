@@ -79,6 +79,6 @@ export class ChatPage {
       } else {
         clearInterval(interval);
       }
-    }, 50); 
+    }, 19); 
   }
 }
