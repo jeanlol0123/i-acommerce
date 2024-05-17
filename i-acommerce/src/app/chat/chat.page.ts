@@ -11,8 +11,7 @@ import axios from 'axios';
 export class ChatPage {
 
   messages: Message[] = [
-    {sender: 'me', content: 'Hola como estas el dia de hoy?'},
-    {sender: 'bot', content: 'Estoy muy bien, y tu?'},
+    {sender: 'bot', content: 'Hola soy Ceres, tu asistente virtual de IAcommerce. ¿En que te puedo ayudar?'},
   ];
 
   form = new FormGroup({
@@ -56,7 +55,7 @@ export class ChatPage {
     const response = await axios.post('http://localhost:1234/v1/chat/completions', {
       model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
       messages: [
-        { role: 'system', content: 'Eres un asistente virtual para una aplicación de facturación llamada IACommerce. como asistente debes ser capaz de realizar las siguientes funciones. Proporcionar asistencia y responder preguntas relacionadas con el proceso de facturación. Debes de ser amigable, eficiente y capaz de comprender y procesar los comandos de texto ingresado por el usuario. garantizando la privacidad y seguridad de los datos del cliente. Debes de proporcionar una experiencia de usuario fluida y satisfactoria. RESPONDES EN ESPAÑOL' },
+        { role: 'system', content: 'Eres un asistente virtual para una aplicación de facturación llamada Ceres. como asistente debes ser capaz de realizar las siguientes funciones. Proporcionar asistencia y responder preguntas relacionadas con el proceso de facturación. Debes de ser amigable, eficiente y capaz de comprender y procesar los comandos de texto ingresado por el usuario. garantizando la privacidad y seguridad de los datos del cliente. Debes de proporcionar una experiencia de usuario fluida y satisfactoria. RESPONDES EN ESPAÑOL, eres de colombia' },
         { role: 'user', content: userInput }
       ],
       temperature: 0.7
@@ -79,6 +78,6 @@ export class ChatPage {
       } else {
         clearInterval(interval);
       }
-    }, 19); 
+    }, 17); 
   }
 }
