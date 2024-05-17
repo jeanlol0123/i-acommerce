@@ -87,7 +87,7 @@ export class FacturacionPage implements OnInit {
   }
 
   aumentarContador(){
-
+    this.counter += 1;
   }
 
   cancel() {

@@ -1,58 +1,48 @@
-import axios from 'axios';
 
-// Configura el cliente para apuntar al servidor local
-const client = axios.create({
-  baseURL: 'http://localhost:1234/v1',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer lm-studio' // Clave de API
-  }
+import cors from 'cors';
+const { Configuration, OpenAIApi } = require('openai');
+
+// Configuración del cliente de OpenAI
+app.use(cors({
+  origin: 'http://localhost:8100'
+}));
+
+const configuration = new Configuration({
+  apiKey: 'lm-studio',
+  basePath: 'http://localhost:1234/v1'
 });
+const openai = new OpenAIApi(configuration);
 
-const history = [
-  { role: "system", content: "Eres un asistente virtual para una aplicación de facturación llamada 'IACommerce'. como asistente debes ser capaz de realizar las siguientes funciones. Proporcionar asistencia y responder preguntas relacionadas con el proceso de facturación. Debes de ser amigable, eficiente y capaz de comprender y procesar los comandos de texto ingresado por el usuario. garantizando la privacidad y seguridad de los datos del cliente. Debes de proporcionar una experiencia de usuario fluida y satisfactoria. RESPONDES EN ESPAÑOL" },
-  { role: "user", content: "Hello, introduce yourself to someone opening this program for the first time. Be concise." }
+let history = [
+  { role: 'system', content: 'Eres un asistente virtual para una aplicación de facturación llamada IACommerce. como asistente debes ser capaz de realizar las siguientes funciones. Proporcionar asistencia y responder preguntas relacionadas con el proceso de facturación. Debes de ser amigable, eficiente y capaz de comprender y procesar los comandos de texto ingresado por el usuario. garantizando la privacidad y seguridad de los datos del cliente. Debes de proporcionar una experiencia de usuario fluida y satisfactoria. RESPONDES EN ESPAÑOL' },
+  { role: 'user', content: 'hola, se conciso con el asistente' }
 ];
 
-async function chatLoop() {
-  while (true) {
-    try {
-      const response = await client.post('/chat/completions', {
-        model: "lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
-        messages: history,
-        temperature: 0.7,
-        stream: true
-      });
+async function chatWithAssistant(userInput) {
+  history.push({ role: 'user', content: userInput });
 
-      let newMessage = { role: "assistant", content: "" };
+  const response = await openai.createChatCompletion({
+    model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
+    messages: history,
+    temperature: 0.7,
+    stream: true
+  });
 
-      response.data.choices.forEach((chunk) => {
-        if (chunk.delta && chunk.delta.content) {
-          process.stdout.write(chunk.delta.content);
-          newMessage.content += chunk.delta.content;
-        }
-      });
+  let newMessage = { role: 'assistant', content: '' };
 
-      console.log();
-      history.push(newMessage);
-      history.push({ role: "user", content: await getUserInput() });
-    } catch (error) {
-      console.error("Error:", error.message);
+  for await (const chunk of response.data) {
+    if (chunk.choices[0].delta.content) {
+      process.stdout.write(chunk.choices[0].delta.content);
+      newMessage.content += chunk.choices[0].delta.content;
     }
   }
+
+  history.push(newMessage);
+  console.log();
+  return newMessage.content;
 }
 
-function getUserInput() {
-  return new Promise((resolve) => {
-    const readline = require('readline').createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-    readline.question("> ", (input) => {
-      readline.close();
-      resolve(input);
-    });
-  });
-}
-
-chatLoop();
+// Ejemplo de uso
+chatWithAssistant("¿Cuál es la capital de Francia?").then(response => {
+  console.log("Respuesta del asistente:", response);
+});
