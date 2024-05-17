@@ -30,7 +30,7 @@ export const postOrder  =  async (req, res) => {
         const existFactura = await facturaExist(idFactura);
         const exist = await productExist(idProducto);
         if(!exist || !existFactura){
-            return res.status(404).json({ message: "No se ha encontrado alguno de los datos" });
+            return res.status(404).json({ message: "No se ha encontrado alguno de los datos Producto = " + exist + " Factura = " + existFactura });
         }
         const [rows] = await pool.query('INSERT INTO pedidoproducto (idFactura,idProducto,cantidad) VALUES (?,?,?)',
         [idFactura,idProducto,cantidad]);

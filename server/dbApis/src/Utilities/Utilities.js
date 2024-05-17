@@ -36,10 +36,6 @@ export async function productExist(id){
 
 export async function facturaExist(id){
     try {
-        id = parseInt(id);
-        if (isNaN(id)) {
-            throw new Error("Invalid id");
-        }
         const [rows] = await pool.query('SELECT * FROM factura WHERE id = ?', [id]);
         return rows.length > 0;
     } catch (error) {

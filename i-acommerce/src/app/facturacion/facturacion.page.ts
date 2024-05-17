@@ -16,10 +16,8 @@ export class FacturacionPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   counter: number = 0;
   formData: FormGroup;
-  loading: boolean = false;
   canCreate = false;
   message: string = '';
-  icon: string = '';
 
   constructor(private router: Router, private datosService: DatosServiceService) {}
 
@@ -36,7 +34,6 @@ export class FacturacionPage implements OnInit {
 
   onSubmit() {
     if (this.formData.valid) {
-      this.loading = true; // Show the loading indicator
       const nombre: string = this.formData.get('Nombre')?.value;
       const apellido: string = this.formData.get('Apellido')?.value;
       const direccion: string = this.formData.get('Direccion')?.value;
@@ -50,13 +47,10 @@ export class FacturacionPage implements OnInit {
             this.datosService.setRemitenteId(remitente.id);
             this.counter += 1;
             this.formData.reset();
-            this.message = "Se ha validado el usuario con éxito";
-            this.icon = "checkmark-circle";
+
           })
           .catch((error: any) => {
             console.log("Ha ocurrido un error" + error);
-            this.message = "No se ha podido validar el usuario con éxito";
-            this.icon = "close-circle";
           })
       } else {
         postUser(nombre, apellido, direccion, ciudad, telefono, correo)
@@ -67,11 +61,9 @@ export class FacturacionPage implements OnInit {
           })
           .catch((error: any) => {
             console.log("Ha ocurrido un error" + error);
-            this.message = "No se ha podido validar el usuario con éxito";
-            this.icon = "close-circle";
           })
           
-        //this.router.navigate(['tabs/facturacion/facturacionform2']);
+
       }
     }
   }
@@ -80,6 +72,7 @@ export class FacturacionPage implements OnInit {
     postshipment(idRemitente, idDestinatario)
       .then((relacion: number) => {
         this.datosService.setRelacion(relacion);
+        this.router.navigate(['tabs/facturacion/facturacionform2']);
       })
       .catch((error: any) => {
         console.log("Ha ocurrido un error" + error);

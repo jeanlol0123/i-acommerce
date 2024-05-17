@@ -1,4 +1,5 @@
 import {pool} from '../databases/dbConnection.js';
+import { generarId } from '../Utilities/generate.js';
 import { shipmentExist } from '../Utilities/Utilities.js';
 
 export const getInvoices = async (req, res) => {
@@ -24,26 +25,27 @@ export const getSingleInvoice = async (req, res) => {
     }
 }
 
-export const postInvoice  =  async (req, res) => {
-    try{
-        const {idRelacionesEnvio, fechaGeneracion, fechaVencimiento} = req.body;
+export const postInvoice = async (req, res) => {
+    try {
+        const { idRelacionesEnvio, fechaGeneracion, fechaVencimiento } = req.body;
         const exist = await shipmentExist(idRelacionesEnvio);
-        if(exist){
-            const [rows] = await pool.query('INSERT INTO factura (idRelacionesEnvio,fechaCreacion,fechaVencimiento) VALUES (?,?,?)',
-            [idRelacionesEnvio, fechaGeneracion, fechaVencimiento]);
+        const idFactura = await generarId(); 
+
+        if (exist) {
+            const [rows] = await pool.query('INSERT INTO factura (id, idRelacionesEnvio, fechaCreacion, fechaVencimiento) VALUES (?, ?, ?, ?)',
+                [idFactura, idRelacionesEnvio, fechaGeneracion, fechaVencimiento]);
             res.status(201).send({
-                id: rows.insertId,
-                idRelacionesEnvio,
-                fechaGeneracion,
-                fechaVencimiento
+                id: idFactura,
+                message: "Factura creada ",
+
             });
-        } else{
+        } else {
             return res.status(404).json({ message: "No se ha encontrado el envio" });
         }
-    } catch(error){
-        res.status(500).json({ message: "Ocurrio un error al crear la factura",error:error.message });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Ocurrio un error al crear la factura", error: error.message });
     }
-
 }
 
 export const deleteInvoice = async (req, res) => {

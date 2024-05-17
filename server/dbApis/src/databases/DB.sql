@@ -22,24 +22,23 @@ CREATE TABLE `relacionesenvio` (
 );
 
 CREATE TABLE `factura` (
-  `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  id varchar(20) PRIMARY KEY NOT NULL,
   `idRelacionesEnvio` int,
-  `fechaCreacion` timestamp NOT NULL,
+  `fechaCreacion` timestamp NOT NULL, 
   `fechaVencimiento` timestamp NOT NULL
 );
 
 CREATE TABLE `pedidoproducto` (
-  `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `idFactura` int,
+  `idFactura` varchar(20),
   `idProducto` integer,
   `cantidad` integer NOT NULL
 );
 
-ALTER TABLE `remitenteDestinatario` ADD FOREIGN KEY (`idRemitente`) REFERENCES `persona` (`id`);
+ALTER TABLE `relacionesenvio` ADD FOREIGN KEY (`remitente`) REFERENCES `persona` (`id`);
 
-ALTER TABLE `remitenteDestinatario` ADD FOREIGN KEY (`idDestinatario`) REFERENCES `persona` (`id`);
+ALTER TABLE `relacionesenvio` ADD FOREIGN KEY (`destinatario`) REFERENCES `persona` (`id`);
 
-ALTER TABLE `factura` ADD FOREIGN KEY (`idRelacionesEnvio`) REFERENCES `remitenteDestinatario` (`id`);
+ALTER TABLE `factura` ADD FOREIGN KEY (`idRelacionesEnvio`) REFERENCES `relacionesenvio` (`id`);
 
 ALTER TABLE `pedidoproducto` ADD FOREIGN KEY (`idFactura`) REFERENCES `factura` (`id`);
 
