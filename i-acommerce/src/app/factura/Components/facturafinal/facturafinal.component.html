@@ -1,0 +1,24 @@
+<div *ngIf="invoice; else loading">
+    <div *ngIf="!error; else errorDisplay">
+      <h2>Facturas:</h2>
+      <div *ngFor="let factura of invoice">
+        <div>
+          <p><strong>ID:</strong> {{ factura.id }}</p>
+          <p><strong>Fecha de Creación:</strong> {{ factura.fechaCreacion }}</p>
+          <p><strong>Fecha de Vencimiento:</strong> {{ factura.fechaVencimiento }}</p>
+          <p><strong>Remitente:</strong> {{ factura.remitente.nombre }} {{ factura.remitente.apellido }}</p>
+          <p><strong>Destinatario:</strong> {{ factura.destinatario.nombre }} {{ factura.destinatario.apellido }}</p>
+          <p><strong>Producto:</strong> {{ factura.producto.producto_nombre }}</p>
+          <p><strong>Cantidad:</strong> {{ factura.producto.cantidad }}</p>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <ng-template #errorDisplay>
+      <p>{{ error }}</p>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <p>Cargando...</p>
+  </ng-template>
+<ion-button (click)="searchInvoice()">VerFactura</ion-button>

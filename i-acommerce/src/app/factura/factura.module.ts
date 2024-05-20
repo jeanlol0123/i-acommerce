@@ -9,6 +9,7 @@ import { FacturaPageRoutingModule } from './factura-routing.module';
 import { InfoUsuarioComponent } from './Components/info-usuario/info-usuario.component';
 import { FechasComponent } from './Components/fechas/fechas.component';
 import { ProductosComponent } from './Components/productos/productos.component';
+import { FacturafinalComponent } from './Components/facturafinal/facturafinal.component';
 
 import { FacturaPage } from './factura.page';
 
@@ -20,7 +21,7 @@ import { FacturaPage } from './factura.page';
     FacturaPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent], 
+  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent,FacturafinalComponent], 
   exports: [InfoUsuarioComponent] 
 })
 export class FacturaPageModule {}

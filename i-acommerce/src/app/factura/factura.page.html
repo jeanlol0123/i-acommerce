@@ -20,6 +20,11 @@
     <app-productos (productsValidated)="verificacionProductos($event)"></app-productos>
   </div>
 
+  Informacion de la factura:
+  <div *ngIf="showInfo">
+    <app-facturafinal></app-facturafinal>
+  </div>
+
   <div *ngIf="showFinalButton">
     <ion-button>Generar PDF</ion-button>
   </div>

@@ -42,6 +42,7 @@ export const getSingleWholeInvoice = async (req, res) => {
         if (rows.length === 0) {
             return res.status(404).json({ message: "No se ha podido realizar la factura" });
         }
+        console.log(res.json(rows));
         res.json(rows);
     } catch (error) {
         res.status(500).json({ message: "No existe la factura", error: error.message });

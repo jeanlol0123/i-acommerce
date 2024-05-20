@@ -68,3 +68,14 @@ export const updateProduct = async(req, res) => {
     }
 
 }
+
+
+export const getProductsByFilter = async (req, res) => {
+    try {
+        const idFactura = req.params.body; 
+        const [rows] = await pool.query('SELECT * FROM pedidoproducto WHERE idFactura = ?;', [idFactura]);
+        res.status(200).json(rows);
+    } catch (error) {
+        res.status(500).json({ message: "Ocurrió un error al buscar los productos", error: error.message });
+    }
+}

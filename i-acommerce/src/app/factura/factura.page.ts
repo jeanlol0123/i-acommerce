@@ -11,6 +11,7 @@ export class FacturaPage implements OnInit {
   showDates = false;
   showProducts = false;
   showFinalButton = false;
+  showInfo=true;
   isCheckedRelation: boolean = false;
   isCheckedDates:boolean = false;
   isCheckedProducts:boolean = false;
