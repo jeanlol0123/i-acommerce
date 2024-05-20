@@ -14,5 +14,14 @@
   <div *ngIf="showDates">
     <app-fechas (datesValidated)="verificacionFechas($event)"></app-fechas>
   </div>
+  <br>
+  <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedProducts" disabled>Lista de Productos</ion-checkbox>
+  <div *ngIf="showProducts">
+    <app-productos (productsValidated)="verificacionProductos($event)"></app-productos>
+  </div>
+
+  <div *ngIf="showFinalButton">
+    <ion-button>Generar PDF</ion-button>
+  </div>
 
 </ion-content>

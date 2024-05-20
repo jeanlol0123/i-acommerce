@@ -8,8 +8,8 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'facturacion',
-        loadChildren: () => import('../facturacion/facturacion.module').then(m => m.FacturacionPageModule)
+        path: 'factura',
+        loadChildren: () => import('../factura/factura.module').then(m => m.FacturaPageModule)
       },
       {
         path: 'pdfs',
@@ -21,14 +21,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/facturacion',
+        redirectTo: '/tabs/factura',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/facturacion',
+    redirectTo: '/tabs/factura',
     pathMatch: 'full'
   }
 ];

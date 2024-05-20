@@ -5,8 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { FacturaPageRoutingModule } from './factura-routing.module';
+
 import { InfoUsuarioComponent } from './Components/info-usuario/info-usuario.component';
 import { FechasComponent } from './Components/fechas/fechas.component';
+import { ProductosComponent } from './Components/productos/productos.component';
+
 import { FacturaPage } from './factura.page';
 
 @NgModule({
@@ -17,7 +20,7 @@ import { FacturaPage } from './factura.page';
     FacturaPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent], 
+  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent], 
   exports: [InfoUsuarioComponent] 
 })
 export class FacturaPageModule {}

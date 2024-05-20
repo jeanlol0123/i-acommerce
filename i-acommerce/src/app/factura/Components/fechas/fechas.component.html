@@ -12,4 +12,8 @@
   <ion-datetime locale="es-CO" class="datetime" [(ngModel)]="fechaVencimiento"></ion-datetime>
 
   <ion-button (click)="submitDates()">Enviar Datos</ion-button>
+
+  <div *ngIf="error">
+    <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+  </div>
 </div>

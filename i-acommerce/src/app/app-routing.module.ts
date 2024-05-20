@@ -5,9 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },  {
-    path: 'facturacion',
-    loadChildren: () => import('./facturacion/facturacion.module').then( m => m.FacturacionPageModule)
   },
   {
     path: 'pdfs',

@@ -9,8 +9,11 @@ import { DatosServiceService } from '../Services/datos-service.service';
 export class FacturaPage implements OnInit {
   showInfoUser = true;
   showDates = false;
+  showProducts = false;
+  showFinalButton = false;
   isCheckedRelation: boolean = false;
   isCheckedDates:boolean = false;
+  isCheckedProducts:boolean = false;
   constructor(private datosService: DatosServiceService) { }
 
   ngOnInit() {}
@@ -23,7 +26,19 @@ export class FacturaPage implements OnInit {
 
   verificacionFechas(isValid:boolean){
     this.showDates = false;
-    this.isCheckedDates = true
+    this.isCheckedDates = true;
+    this.showProducts = true;
   }
+
+
+  verificacionProductos(isValid:boolean){
+    this.showProducts = false;
+    this.isCheckedProducts = true
+    this.showFinalButton = true;
+  }
+
+
+
+
 
 }

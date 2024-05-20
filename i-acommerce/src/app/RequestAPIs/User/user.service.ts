@@ -1,5 +1,5 @@
 import axios from "axios";
-import { usuario } from "src/app/facturacion/interfaces/usuario.interface";
+import { usuario } from "src/app/factura/Interfaces/usuario.interface";
 
 
 export async function postUser(nombre:string,apellido:string,direccion:string,telefono:string,correo:string,ciudad:string){

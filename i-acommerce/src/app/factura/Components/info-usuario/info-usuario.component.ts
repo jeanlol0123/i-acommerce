@@ -2,7 +2,7 @@ import { Component, OnInit,Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { postUser } from 'src/app/RequestAPIs/User/user.service';
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
-import { usuario } from 'src/app/facturacion/interfaces/usuario.interface';
+import { usuario } from '../../Interfaces/usuario.interface';
 import { crearRelacion } from '../../Utilities/utilities';
 
 import { EventEmitter } from '@angular/core';

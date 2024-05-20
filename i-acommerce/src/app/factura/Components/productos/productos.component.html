@@ -1,0 +1,75 @@
+<ion-modal trigger="modalOpener">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Lista de Productos Disponibles</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="box">Id</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="box">Nombre</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="box">Costo</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="box">Stock</div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="rowModal" *ngFor="let producto of listaProductos">
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="item">{{ producto.id }}</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="item">{{ producto.nombre }}</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="item">{{ producto.costo }}</div>
+          </ion-col>
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="3">
+            <div class="item">{{ producto.stock }}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<div class="formContainer">
+  <form (ngSubmit)="agregarProducto()">
+    <div class="form-group">
+      <label for="inputProducto">Ingrese el producto a agregar</label>
+      <select id="inputProducto" class="form-control" [(ngModel)]="id" name="id">
+        <option *ngFor="let producto of listaProductos" [value]="producto.id">{{producto.nombre}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="inputCantidad">Cantidad</label>
+      <ion-input id="inputCantidad" class="form-control" [(ngModel)]="cantidad" name="cantidad" type="number"></ion-input>
+
+      
+
+      <ion-button class="btn btn-primary" type="submit">Agregar el producto al carrito</ion-button>
+    </div>
+  </form>
+</div>
+<div class="formContainer">
+  <div *ngFor="let product of carritoProductos">
+    <p>Product ID: {{ product.id }}</p>
+    <p>Product Name:</p>
+    <p>Quantity: {{ product.cantidad }}</p>
+  </div>
+
+  <ion-button (click)="terminar()">terminar</ion-button>
+  <div *ngIf="error">
+    <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+  </div>
+
+</div>

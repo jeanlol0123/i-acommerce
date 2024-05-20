@@ -1,5 +1,5 @@
 import axios from "axios";
-import { descProducto } from "src/app/facturacion/interfaces/productoDescription.interface";
+import { descProducto } from "src/app/factura/Interfaces/productoDescription.interface";
 
 export async function getProducts(): Promise<descProducto[]>{
 
@@ -18,8 +18,20 @@ export async function getProducts(): Promise<descProducto[]>{
 }
 
 
-export async function postProduct() {
-    
+export async function postProduct(idFactura:string,idProducto:number,cantidad:number) {
+    const data = {
+            "idProducto": idProducto,
+            "idFactura":idFactura,
+            "cantidad": cantidad
+    }
+
+    try{
+        const response = await axios.post('http://localhost:3000/api/orderDetail', data);
+        console.log(response.data);
+        console
+    } catch(err){
+        throw err
+    }
 }
 
 
