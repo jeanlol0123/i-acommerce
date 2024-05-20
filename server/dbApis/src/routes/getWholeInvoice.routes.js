@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getSingeleWholeInvoice } from "../controllers/wholeInvoice.controller.js";
+import { getSingleWholeInvoice } from "../controllers/wholeInvoice.controller.js";
 const router = Router();
 
-router.get('/wholeInvoice',getSingeleWholeInvoice);
+router.get('/wholeInvoice/:idFactura', getSingleWholeInvoice);
 
 export default router;

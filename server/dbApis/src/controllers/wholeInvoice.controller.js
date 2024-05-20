@@ -1,7 +1,9 @@
 import { pool } from "../databases/dbConnection.js";
 
-export const getSingeleWholeInvoice = async (req, res) => {
+export const getSingleWholeInvoice = async (req, res) => {
     const idFactura = req.params.idFactura;
+    console.log(idFactura); // Asegúrate de que esto imprima el valor correcto
+
     try {
         const [rows] = await pool.query(
             `
@@ -35,7 +37,6 @@ export const getSingeleWholeInvoice = async (req, res) => {
                 f.id = ?;
             `,
             [idFactura]
-
         );
         console.log(rows);
         if (rows.length === 0) {
@@ -43,6 +44,6 @@ export const getSingeleWholeInvoice = async (req, res) => {
         }
         res.json(rows);
     } catch (error) {
-        res.status(500).json({ message: "No existe la factura: ",error:error.message });
+        res.status(500).json({ message: "No existe la factura", error: error.message });
     }
 }
