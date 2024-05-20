@@ -1,0 +1,38 @@
+.dateTitle {
+    padding: 10px 0 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center; 
+  }
+  
+  .labelTime {
+    padding: 0 0 10px 0;
+    font-size: 16px;
+    color: #666;
+    text-align: center; 
+    display: block; 
+    padding: 40px 50px 10px 0;
+  }
+  
+  .dates {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+    border: 2px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center; 
+  }
+  
+  .datetime {
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto; 
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    display: block; 
+  }

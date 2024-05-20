@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>factura</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedRelation" disabled>Remitente y Destinatario</ion-checkbox>
+  <div *ngIf="showInfoUser">
+    <app-info-usuario (relationValidated)="handleRelationValidated($event)"></app-info-usuario>
+  </div>
+  <br>
+  <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedDates" disabled>Fechas de Creacion y Expiracion</ion-checkbox>
+  <div *ngIf="showDates">
+    <app-fechas (datesValidated)="verificacionFechas($event)"></app-fechas>
+  </div>
+
+</ion-content>

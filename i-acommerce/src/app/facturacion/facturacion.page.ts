@@ -6,6 +6,7 @@ import { postUser, postshipment } from '../RequestAPIs/User/user.service';
 import { DatosServiceService } from '../Services/datos-service.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { crearRelacion } from '../factura/Utilities/utilities';
 
 @Component({
   selector: 'app-facturacion',
@@ -56,7 +57,7 @@ export class FacturacionPage implements OnInit {
         postUser(nombre, apellido, direccion, ciudad, telefono, correo)
           .then((destinatario: usuario) => {
             this.datosService.setDestinatario(destinatario.id);
-            this.crearRelacion(this.datosService.getRemitenteId(), destinatario.id);
+            crearRelacion(this.datosService.getRemitenteId(), destinatario.id,this.datosService);
             this.counter += 1;
           })
           .catch((error: any) => {
@@ -68,16 +69,7 @@ export class FacturacionPage implements OnInit {
     }
   }
 
-  crearRelacion(idRemitente: number, idDestinatario: number) {
-    postshipment(idRemitente, idDestinatario)
-      .then((relacion: number) => {
-        this.datosService.setRelacion(relacion);
-        this.router.navigate(['tabs/facturacion/facturacionform2']);
-      })
-      .catch((error: any) => {
-        console.log("Ha ocurrido un error" + error);
-      });
-  }
+
 
   aumentarContador(){
     this.counter += 1;

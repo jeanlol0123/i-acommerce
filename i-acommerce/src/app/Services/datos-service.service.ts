@@ -6,10 +6,12 @@ import { producto } from '../facturacion/interfaces/producto.interface';
   providedIn: 'root'
 })
 export class DatosServiceService {
-
+  
   private remitenteId: number;
   private destinatarioId: number;
   private relacion:number;
+  private idFactura:string;
+  private validRelation:boolean = false;
   private productos: producto[] = [];
 
   constructor() { }
@@ -24,6 +26,10 @@ export class DatosServiceService {
 
   setRelacion(relacionId:number){
     this.relacion = relacionId;
+  }
+
+  setidFactura(factura:string){
+    this.idFactura = factura;
   }
 
   anadirProductos(producto: producto): void {
@@ -42,8 +48,17 @@ export class DatosServiceService {
     return this.productos;
   }
 
+  getidfactura(){
+    return this.idFactura;
+  }
+
   getRelacion():number{
     return this.relacion;
+  }
+
+  setValidRelation():boolean{
+    this.validRelation = true;
+    return this.validRelation;
   }
 
   getAllData() {

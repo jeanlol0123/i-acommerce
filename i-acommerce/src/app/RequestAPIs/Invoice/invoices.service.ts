@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function postInvoice(idRelaciones:number,HoraCreacion:string,HoraVencimiento:string){
+export async function postInvoice(idRelaciones:number,HoraCreacion:string,HoraVencimiento:string):Promise<String>{
     const data = {
-        idRelaciones: idRelaciones,
-        HoraCreacion: HoraCreacion,
-        HoraVencimiento: HoraVencimiento
+        idRelacionesEnvio: idRelaciones,
+        fechaGeneracion: HoraCreacion,
+        fechaVencimiento: HoraVencimiento
     }
         try {
           const response = await axios.post('http://localhost:3000/api/invoice', data);

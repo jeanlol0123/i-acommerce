@@ -1,0 +1,46 @@
+<form [formGroup]="formData" (ngSubmit)="submit()">
+  <ion-title *ngIf="counter == 0">Datos Remitente</ion-title>
+  <ion-title *ngIf="counter == 1">Datos Destinatario</ion-title>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre Usuario</ion-label>
+      <ion-input placeholder="Nombre Usuario" formControlName="Nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input placeholder="Apellido" formControlName="Apellido" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input placeholder="Dirección" formControlName="Direccion" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Ciudad</ion-label>
+      <ion-input placeholder="Ciudad" formControlName="Ciudad" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input placeholder="Teléfono" formControlName="Telefono" type="number"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input placeholder="Correo" formControlName="Correo" type="email"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="error">
+    <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+  </div>
+
+
+
+  <ng-container>
+    <ion-button type="submit" id="submitData" expand="block">Siguiente</ion-button>
+    <ion-loading message="Validando datos de usuario" duration="3000"></ion-loading>
+  </ng-container>
+</form>
