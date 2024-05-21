@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-// Set the fonts
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 
 @Component({
   selector: 'app-pdfs',
@@ -18,6 +16,7 @@ export class PDFsPage implements OnInit {
   }
 
   generatePDF() {
+  /*
     const docDefinition = {
       content: [
         { text: 'FACTURA', style: 'header' },
@@ -124,8 +123,8 @@ export class PDFsPage implements OnInit {
       }
     };
 
-    pdfMake.createPdf(docDefinition).download('Factura.pdf');
+
   }
-
+*/
+  }
 }
-
