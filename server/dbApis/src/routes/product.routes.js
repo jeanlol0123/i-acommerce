@@ -12,7 +12,7 @@ router.delete('/product/:id', deleteProduct);
 
 router.put('/product/:id', updateProduct);
 
-router.get('/productsByInvoice', getProductsByFilter);
+router.get('/productsByInvoice/:idFactura', getProductsByFilter);
 
 
 

@@ -1,0 +1,33 @@
+.invoice-container {
+    border: 2px solid #000; /* Borde de 2px de grosor, color negro */
+    margin-left: 50px; /* Margen izquierdo de 50px */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    background-color: #f9f9f9; 
+  }
+  
+  .invoice-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .invoice-item:last-child {
+    border-bottom: none;
+  }
+  
+  .invoice-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .loading-message {
+    font-style: italic;
+    color: #555;
+  }

@@ -2,12 +2,10 @@ import axios from 'axios';
 
 export async function getWholeInvoice(factura: string): Promise<WholeInvoice[]> {
     try {
-        const response = await axios.get(`http://localhost:3000/api/wholeInvoice/${factura}`);
-        
+        const response = await axios.get(`http://localhost:3000/api/wholeInvoice/` + factura);
         if (response.data && Array.isArray(response.data)) {
             const dataArray = response.data;
-
-            const invoices: WholeInvoice[] = dataArray.map(data => ({
+            const invoices: WholeInvoice[] = dataArray.map((data, index) => ({
                 id: data.id,
                 fechaCreacion: data.fechaCreacion,
                 fechaVencimiento: data.fechaVencimiento,
@@ -26,11 +24,6 @@ export async function getWholeInvoice(factura: string): Promise<WholeInvoice[]> 
                     telefono: data.destinatario_telefono,
                     correo: data.destinatario_correo,
                     ciudad: data.destinatario_ciudad
-                },
-                producto: {
-                    idProducto: data.idProducto,
-                    producto_nombre: data.producto_nombre,
-                    cantidad: data.cantidad
                 }
             }));
 
@@ -43,28 +36,25 @@ export async function getWholeInvoice(factura: string): Promise<WholeInvoice[]> 
         console.error('Error fetching the invoice:', err);
         throw err;
     }
-}
 
+}
 export interface Usuario {
+
     nombre: string;
     apellido: string;
     direccion: string;
     telefono: string;
     correo: string;
     ciudad: string;
-}
 
-export interface Producto {
-    idProducto: number;
-    producto_nombre: string;
-    cantidad: number;
 }
 
 export interface WholeInvoice {
+
     id: string;
     fechaCreacion: string;
     fechaVencimiento: string;
     remitente: Usuario;
     destinatario: Usuario;
-    producto: Producto;
+
 }

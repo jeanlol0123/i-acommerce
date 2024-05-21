@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { WholeInvoice, getWholeInvoice } from 'src/app/RequestAPIs/WholeInvoice/wholeInvoice.service'; 
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
+import { producto } from '../../Interfaces/producto.interface';
+import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
 
 @Component({
   selector: 'app-facturafinal',
@@ -9,7 +11,9 @@ import { DatosServiceService } from 'src/app/Services/datos-service.service';
 })
 export class FacturafinalComponent implements OnInit {
   invoice: WholeInvoice[] | undefined; 
+  productos:any[];
   error: string | undefined; 
+  idFactura:string;
 
   constructor(private datosService:DatosServiceService) { }
 
@@ -20,11 +24,12 @@ export class FacturafinalComponent implements OnInit {
   async searchInvoice() {
     try {
       const invoices = await getWholeInvoice(this.datosService.getidfactura());
+      this.productos = await getFilterProducts(this.datosService.getidfactura());
       this.invoice = this.removeDuplicates(invoices, 'id');
-      console.log('Factura desde el componente:', this.invoice);
+
     } catch (error) {
       console.error('Error al obtener la factura:', error);
-      this.error = 'No se pudo obtener la factura. Por favor, intente nuevamente.'; // Manejar el error
+      this.error = 'No se pudo obtener la factura. Por favor, intente nuevamente.'; 
     }
   }
   

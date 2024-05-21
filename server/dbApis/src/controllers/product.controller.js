@@ -13,7 +13,7 @@ export const getSingleProduct = async (req, res) => {
     const id = req.params.id;
     try {
         const [rows] = await pool.query('SELECT * FROM producto WHERE id = ?', id);
-        
+
         if (rows.length === 0) {
             return res.status(404).json({ message: "No se ha encontrado el producto" });
         }
@@ -72,10 +72,22 @@ export const updateProduct = async(req, res) => {
 
 export const getProductsByFilter = async (req, res) => {
     try {
-        const idFactura = req.params.body; 
-        const [rows] = await pool.query('SELECT * FROM pedidoproducto WHERE idFactura = ?;', [idFactura]);
-        res.status(200).json(rows);
+      const idFactura = req.params.idFactura; 
+      const [rows] = await pool.query(`
+      SELECT pedidoproducto.idProducto, producto.nombre, pedidoproducto.cantidad
+        FROM pedidoproducto
+        INNER JOIN producto ON pedidoproducto.idProducto = producto.id
+        WHERE idFactura = ?;` , [idFactura]);
+      console.log(rows);
+      res.status(200).json(rows);
     } catch (error) {
-        res.status(500).json({ message: "Ocurrió un error al buscar los productos", error: error.message });
+      res.status(500).json({ message: "Ocurrió un error al buscar los productos", error: error.message });
     }
+
 }
+/*
+tests:      SELECT pedidoproducto.idProducto, producto.nombre, pedidoproducto.cantidad
+FROM pedidoproducto
+INNER JOIN producto ON pedidoproducto.idProducto = producto.id WHERE idFactura = CxybapIiz8sQp3ZcakyD;
+
+*/
