@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { WholeInvoice, getWholeInvoice } from 'src/app/RequestAPIs/WholeInvoice/wholeInvoice.service'; 
+import { DatosServiceService } from 'src/app/Services/datos-service.service';
+import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
 
 // Asigna las fuentes virtuales
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
@@ -11,10 +14,28 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
   styleUrls: ['./pdfs.page.scss'],
 })
 export class PDFsPage implements OnInit {
+  invoice: WholeInvoice[] | undefined; 
+  productos:any[];
+  error: string | undefined; 
+  idFactura:string;
 
-  constructor() { }
 
-  ngOnInit() {
+
+  constructor(private datosService:DatosServiceService) { }
+
+
+
+  async ngOnInit() {
+    try {
+      const invoices = await getWholeInvoice("rJBTNwmue_S5hqBxx-0m");
+      this.productos = await getFilterProducts("rJBTNwmue_S5hqBxx-0m");
+      console.log(this.productos);
+      console.log(invoices);
+
+    } catch (error) {
+      console.error('Error al obtener la factura:', error);
+      this.error = 'No se pudo obtener la factura. Por favor, intente nuevamente.'; 
+    }
   }
 
   generatePDF() {

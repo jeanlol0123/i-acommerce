@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WholeInvoice, getWholeInvoice } from 'src/app/RequestAPIs/WholeInvoice/wholeInvoice.service'; 
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
-import { producto } from '../../Interfaces/producto.interface';
 import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
 
 @Component({
