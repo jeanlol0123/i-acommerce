@@ -47,4 +47,21 @@ export async function getFilterProducts(idFactura:string): Promise<producto[]>{
     }
 }
 
+export async function addProduct(nombre: string, costo: string, stock: string): Promise<boolean> {
+    const data = {
+        nombre: nombre,
+        costo: costo,
+        stock: stock
+    };
+
+    try {
+        const response = await axios.post('http://localhost:3000/api/product', data);
+        console.log("Respuesta del servidor" + response.status);
+        return response.status === 201; 
+    } catch (err) {
+        console.error('Error al agregar el producto:', err);
+        return false; 
+    }
+}
+
 

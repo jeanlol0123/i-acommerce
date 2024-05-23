@@ -11,10 +11,12 @@ export class FacturaPage implements OnInit {
   showDates = false;
   showProducts = false;
   showFinalButton = false;
+  showAddProducts = false;
   showInfo=true;
   isCheckedRelation: boolean = false;
   isCheckedDates:boolean = false;
   isCheckedProducts:boolean = false;
+  isCheckedAddProducts:boolean = false;
   constructor(private datosService: DatosServiceService) { }
 
   ngOnInit() {}
@@ -28,6 +30,12 @@ export class FacturaPage implements OnInit {
   verificacionFechas(isValid:boolean){
     this.showDates = false;
     this.isCheckedDates = true;
+    this.showAddProducts = true;
+  }
+
+  verificacionProductosAnadidos(isValid:boolean){
+    this.showAddProducts = false;
+    this.isCheckedAddProducts = true;
     this.showProducts = true;
   }
 
@@ -37,9 +45,5 @@ export class FacturaPage implements OnInit {
     this.isCheckedProducts = true
     this.showFinalButton = true;
   }
-
-
-
-
 
 }

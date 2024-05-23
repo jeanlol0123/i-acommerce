@@ -15,6 +15,10 @@
     <app-fechas (datesValidated)="verificacionFechas($event)"></app-fechas>
   </div>
   <br>
+  <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedAddProducts" disabled>Agregar Productos a la tienda</ion-checkbox>
+  <div *ngIf="showAddProducts"> 
+    <app-agregar-producto (addproductsvalidated)="verificacionProductosAnadidos($event)"></app-agregar-producto>
+  </div>
   <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedProducts" disabled>Lista de Productos</ion-checkbox>
   <div *ngIf="showProducts">
     <app-productos (productsValidated)="verificacionProductos($event)"></app-productos>

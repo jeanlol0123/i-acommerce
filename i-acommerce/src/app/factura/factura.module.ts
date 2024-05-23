@@ -12,6 +12,7 @@ import { ProductosComponent } from './Components/productos/productos.component';
 import { FacturafinalComponent } from './Components/facturafinal/facturafinal.component';
 
 import { FacturaPage } from './factura.page';
+import { AgregarProductoComponent } from './Components/agregar-producto/agregar-producto.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import { FacturaPage } from './factura.page';
     FacturaPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent,FacturafinalComponent], 
+  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent,FacturafinalComponent,AgregarProductoComponent], 
   exports: [InfoUsuarioComponent] 
 })
 export class FacturaPageModule {}

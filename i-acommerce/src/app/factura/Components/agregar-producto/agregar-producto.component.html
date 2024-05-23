@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="form.nombre" name="nombre" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Costo</ion-label>
+    <ion-input [(ngModel)]="form.costo" name="costo" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Stock</ion-label>
+    <ion-input [(ngModel)]="form.stock" name="stock" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" type="submit">Guardar</ion-button>
+</form>
+<ion-button (click)="terminar()">Terminar</ion-button>
+<div *ngIf="error">
+  <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+</div>
