@@ -1,0 +1,52 @@
+<ion-list>
+  <ion-item>
+    <ion-label position="floating">Nombre en la Tarjeta</ion-label>
+    <ion-input type="text" [(ngModel)]="nombreTarjeta"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Número de Tarjeta</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="numeroTarjeta"
+      placeholder="0000 0000 0000 0000"
+      [maskito]="cardMask"
+      [maskitoElement]="maskPredicate"
+      maxlength="19"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Fecha de Expiración</ion-label>
+    <ion-input
+      type="text"
+      placeholder="MM/YY"
+      [(ngModel)]="fechaExpiracion"
+      [maskito]="expiredMask"
+      [maskitoElement]="maskPredicate"
+      maxlength="5"
+    ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Código de Seguridad (CVV)</ion-label>
+    <ion-input type="text" [(ngModel)]="cvv" [maskito]="cvvMask" [maskitoElement]="maskPredicate" maxlength="3"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo de Tarjeta</ion-label>
+    <ion-select [(ngModel)]="tipoTarjeta">
+      <ion-select-option value="Visa">Visa</ion-select-option>
+      <ion-select-option value="Mastercard">Mastercard</ion-select-option>
+      <ion-select-option value="American Express">American Express</ion-select-option>
+      <ion-select-option value="Uala">Uala</ion-select-option>
+      <ion-select-option value="LuloBank">Lulo Bank</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+<ion-button (click)="submitForm()">Enviar Datos</ion-button>
+
+<div *ngIf="error">
+  <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+</div>
