@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
-
-
+// Asigna las fuentes virtuales
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-pdfs',
@@ -16,8 +18,7 @@ export class PDFsPage implements OnInit {
   }
 
   generatePDF() {
-  /*
-    const docDefinition = {
+    const docDefinition: any = {
       content: [
         { text: 'FACTURA', style: 'header' },
         {
@@ -67,7 +68,8 @@ export class PDFsPage implements OnInit {
         {
           style: 'tableExample',
           table: {
-            widths: [ '*', 'auto', 'auto', 'auto', 'auto' ],
+            headerRows: 1,
+            widths: [ '*', 'auto', 'auto', 'auto', 'auto', 'auto' ],
             body: [
               [ 'DESCRIPCIÓN', 'CANT.', 'PRECIO', 'DESCUENTO', 'IMPUESTO', 'IMPORTE' ],
               [ 'Apple Watch SE (GPS, 44mm)', '5', '$279', '3%', '5%', '$1,425' ],
@@ -123,8 +125,7 @@ export class PDFsPage implements OnInit {
       }
     };
 
+    pdfMake.createPdf(docDefinition).download('Factura.pdf');
+  }
 
-  }
-*/
-  }
 }

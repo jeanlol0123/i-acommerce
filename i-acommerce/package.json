@@ -30,6 +30,7 @@
     "@types/pdfkit": "^0.13.4",
     "axios": "^1.6.8",
     "ionicons": "^7.0.0",
+    "pdfmake": "^0.2.10",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -47,6 +48,7 @@
     "@capacitor/cli": "5.7.4",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
+    "@types/pdfmake": "^0.2.9",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.57.0",
