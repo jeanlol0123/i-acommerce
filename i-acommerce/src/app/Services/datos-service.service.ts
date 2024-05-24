@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { usuario } from '../factura/Interfaces/usuario.interface';
 import { producto } from '../factura/Interfaces/producto.interface';
+import { metodo } from '../factura/Interfaces/metodo.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class DatosServiceService {
   private destinatarioId: number;
   private relacion:number;
   private idFactura:string;
+  private metodo:metodo;
   private validRelation:boolean = false;
   private productos: producto[] = [];
 
@@ -30,6 +32,14 @@ export class DatosServiceService {
 
   setidFactura(factura:string){
     this.idFactura = factura;
+  }
+
+  setMetodo(nombre:string,numero:string,fecha:string,codigo:string,tipo:string){
+    this.metodo = {nombre:nombre,numero:numero,fechaExpiracion:fecha,codigo:codigo,tipo:tipo};
+  }
+
+  getMetodo(){
+    return this.metodo;
   }
 
   anadirProductos(producto: producto): void {
@@ -60,13 +70,6 @@ export class DatosServiceService {
     this.validRelation = true;
     return this.validRelation;
   }
-
-  getAllData() {
-    const data = {
-      remitenteId: this.remitenteId,
-      destinatarioId: this.destinatarioId,
-      productos: this.productos,
-    }
-    return data;
-  }
 }
+
+

@@ -23,9 +23,15 @@
   <div *ngIf="showProducts">
     <app-productos (productsValidated)="verificacionProductos($event)"></app-productos>
   </div>
+  <ion-checkbox class="checkboxList" [(ngModel)]="isCheckedMethod" disabled>Metodo de Pago</ion-checkbox>
+  <div *ngIf="showMethod">
+      <app-metodo-pago (methodValidated)="verificacionMetodo($event)"></app-metodo-pago>
+  </div>
 
-  Informacion de la factura:
+
+
   <div *ngIf="showInfo">
+    Informacion de la factura:
     <app-facturafinal></app-facturafinal>
   </div>
 

@@ -13,6 +13,9 @@ import { FacturafinalComponent } from './Components/facturafinal/facturafinal.co
 
 import { FacturaPage } from './factura.page';
 import { AgregarProductoComponent } from './Components/agregar-producto/agregar-producto.component';
+import { MetodoPagoComponent } from './Components/metodo-pago/metodo-pago.component';
+
+import { MaskitoDirective } from '@maskito/angular';
 
 @NgModule({
   imports: [
@@ -20,9 +23,10 @@ import { AgregarProductoComponent } from './Components/agregar-producto/agregar-
     FormsModule,
     IonicModule, 
     FacturaPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaskitoDirective
   ],
-  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent,FacturafinalComponent,AgregarProductoComponent], 
+  declarations: [FacturaPage, InfoUsuarioComponent,FechasComponent,ProductosComponent,FacturafinalComponent,AgregarProductoComponent,MetodoPagoComponent], 
   exports: [InfoUsuarioComponent] 
 })
 export class FacturaPageModule {}

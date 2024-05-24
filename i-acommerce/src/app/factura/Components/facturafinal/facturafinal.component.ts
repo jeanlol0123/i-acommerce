@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WholeInvoice, getWholeInvoice } from 'src/app/RequestAPIs/WholeInvoice/wholeInvoice.service'; 
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
 import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
+import { metodo } from '../../Interfaces/metodo.interface';
 
 @Component({
   selector: 'app-facturafinal',
@@ -9,6 +10,7 @@ import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service
   styleUrls: ['./facturafinal.component.scss'],
 })
 export class FacturafinalComponent implements OnInit {
+  metodoPago:metodo;
   invoice: WholeInvoice[] | undefined; 
   productos:any[];
   error: string | undefined; 
@@ -24,6 +26,7 @@ export class FacturafinalComponent implements OnInit {
     try {
       const invoices = await getWholeInvoice(this.datosService.getidfactura());
       this.productos = await getFilterProducts(this.datosService.getidfactura());
+      this.metodoPago = this.datosService.getMetodo();
       this.invoice = this.removeDuplicates(invoices, 'id');
 
     } catch (error) {
