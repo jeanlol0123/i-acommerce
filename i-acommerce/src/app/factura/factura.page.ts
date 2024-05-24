@@ -10,7 +10,6 @@ export class FacturaPage implements OnInit {
   showInfoUser = true;
   showDates = false;
   showProducts = false;
-  showFinalButton = false;
   showAddProducts = false;
   showMethod = false;
   showInfo=true;
@@ -45,14 +44,13 @@ export class FacturaPage implements OnInit {
   verificacionProductos(isValid:boolean){
     this.showProducts = false;
     this.isCheckedProducts = true
-    //this.showFinalButton = true;
     this.showMethod = true;
   }
 
   verificacionMetodo(isValid:boolean){
     this.showMethod = false;
     this.isCheckedMethod =true;
-    this.showFinalButton = true;
+
   }
 
 }
