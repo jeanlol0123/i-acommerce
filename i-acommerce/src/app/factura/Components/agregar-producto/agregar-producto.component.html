@@ -16,7 +16,10 @@
 
   <ion-button expand="full" type="submit">Guardar</ion-button>
 </form>
-<ion-button (click)="terminar()">Terminar</ion-button>
+<ion-button (click)="terminar()" class="buttonSubmit">Terminar</ion-button>
 <div *ngIf="error">
   <p class="ion-text-center" style="color: red;">{{errorMsg}}</p>
+  <div *ngIf="showbutton">
+    <ion-button (click)="skip()" class="buttonSubmit">Continuar</ion-button>
+  </div>
 </div>

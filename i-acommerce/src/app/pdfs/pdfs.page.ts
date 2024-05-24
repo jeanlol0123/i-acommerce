@@ -5,7 +5,7 @@ import { WholeInvoice, getWholeInvoice } from 'src/app/RequestAPIs/WholeInvoice/
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
 import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
 import { metodo } from '../factura/Interfaces/metodo.interface';
-
+import { calculoImpuesto, calculoImporte, impuesto } from '../factura/Utilities/calculos.class';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -15,35 +15,56 @@ import { metodo } from '../factura/Interfaces/metodo.interface';
   styleUrls: ['./pdfs.page.scss'],
 })
 export class PDFsPage implements OnInit {
-  metodoPago:metodo;
+  totalImpuesto: number;
+  metodoPago: metodo;
+  totalParcial: number = 0;
   invoice: WholeInvoice[] | undefined; 
-  productos:any[];
+  productos: any[];
   error: string | undefined; 
-  idFactura:string;
+  idFactura: string;
 
-
-
-  constructor(private datosService:DatosServiceService) { }
-
-
+  constructor(private datosService: DatosServiceService) { }
 
   async ngOnInit() {
     try {
-      const invoices = await getWholeInvoice("YHl7W5hkmSd1WDmcgqkE");
-      this.productos = await getFilterProducts("YHl7W5hkmSd1WDmcgqkE");
-      this.metodoPago = this.datosService.getMetodo();
-      this.invoice = removeDuplicates(invoices, 'id');
-      console.log(this.productos);
-      console.log(this.invoice);
+      console.log(this.datosService.getidfactura());
+        const invoices = await getWholeInvoice(this.datosService.getidfactura());
+        this.productos = await getFilterProducts(this.datosService.getidfactura());
+        this.metodoPago = this.datosService.getMetodo();
+        this.invoice = removeDuplicates(invoices, 'id');
+        this.totalParcial = 0;
+
+        this.productos.forEach((producto) => {
+            const valor = Number(producto.precio);
+            if (isNaN(valor)) {
+                throw new Error(`Precio no válido para el producto: ${producto.nombre}`);
+            }
+
+            const impuestoUnitario = impuesto(valor);
+            const totalUnitarioConImpuesto = valor + impuestoUnitario;
+            const importe = calculoImporte(valor, producto.cantidad, impuestoUnitario * producto.cantidad);
+            const total = producto.cantidad * totalUnitarioConImpuesto;
+
+            if (isNaN(impuestoUnitario) || isNaN(importe) || isNaN(total)) {
+                throw new Error(`Cálculo no válido para el producto: ${producto.nombre}`);
+            }
+
+            producto.impuesto = impuestoUnitario * producto.cantidad;
+            producto.importe = importe;
+            this.totalParcial += total;
+        });
+
+        this.totalImpuesto = impuesto(this.totalParcial);
 
     } catch (error) {
-      console.error('Error al obtener la factura:', error);
-      this.error = 'No se pudo obtener la factura. Por favor, intente nuevamente.'; 
+        console.error('Error al obtener la factura:', error);
+        this.error = 'No se pudo obtener la factura. Por favor, intente nuevamente.';
     }
   }
 
   generatePDF(invoice: WholeInvoice[] | undefined, productos: any[]) {
-    if(invoice){
+    console.log(invoice)
+    if (invoice) {
       const docDefinition: any = {
         content: [
           { text: 'FACTURA', style: 'header' },
@@ -52,21 +73,13 @@ export class PDFsPage implements OnInit {
               {
                 text: [
                   { text: 'DE\n', style: 'subheader' },
-                  invoice[0].remitente.nombre + '\n' +
-                  invoice[0].remitente.direccion +'\n' +
-                  invoice[0].remitente.ciudad +'\n' +
-                  invoice[0].remitente.telefono + '\n' +
-                  invoice[0].remitente.correo 
+                  `${invoice[0].remitente.nombre}\n${invoice[0].remitente.direccion}\n${invoice[0].remitente.ciudad}\n${invoice[0].remitente.telefono}\n${invoice[0].remitente.correo}`
                 ]
               },
               {
                 text: [
                   { text: 'COBRAR A\n', style: 'subheader' },
-                  invoice[0].destinatario.nombre + '\n' +
-                  invoice[0].destinatario.direccion +'\n' +
-                  invoice[0].destinatario.ciudad +'\n' +
-                  invoice[0].destinatario.telefono + '\n' +
-                  invoice[0].destinatario.correo 
+                  `${invoice[0].destinatario.nombre}\n${invoice[0].destinatario.direccion}\n${invoice[0].destinatario.ciudad}\n${invoice[0].destinatario.telefono}\n${invoice[0].destinatario.correo}`
                 ]
               }
             ]
@@ -97,33 +110,34 @@ export class PDFsPage implements OnInit {
             style: 'tableExample',
             table: {
               headerRows: 1,
-              widths: [ '*', 'auto', 'auto', 'auto', 'auto', 'auto' ],
+              widths: ['*', 'auto', 'auto', 'auto', 'auto'],
               body: [
-                [ 'DESCRIPCIÓN', 'CANT.', 'PRECIO', 'DESCUENTO', 'IMPUESTO', 'IMPORTE' ],
-                [ 'Apple Watch SE (GPS, 44mm)', '5', '$279', '3%', '5%', '$1,425' ],
-                [ 'Enrutador WiFi inteligente TP-Link AC1750', '10', '$56', '5%', '10%', '$595' ],
-                [ 'Interruptor de nintendo Con azul neón y rojo neón', '20', '$299', '', '5%', '$6,279' ],
-                [ 'Portátil Acer Aspire 5 Slim\nPantalla IPS Full HD de 15,6 pulgadas, AMD Ryzen 3 3200U', '5', '$364', '', '', '$1,824' ],
+                ['DESCRIPCIÓN', 'CANT.', 'PRECIO', 'IMPUESTO', 'IMPORTE'],
+                ...productos.map((producto) => {
+                  return [
+                    producto.nombre,
+                    producto.cantidad,
+                    producto.precio,
+                    producto.impuesto,
+                    producto.importe
+                  ];
+                })
               ]
             }
           },
           {
             style: 'totalsTable',
             table: {
-              widths: [ '*', 'auto' ],
+              widths: ['*', 'auto'],
               body: [
-                [ 'TOTAL PARCIAL', '$10,125' ],
-                [ 'DESCUENTO (5%)', '-$506' ],
-                [ 'IMPUESTO (VAT 5.5%)', '$529' ],
-                [ 'ENVÍO', '$100' ],
-                [ { text: 'TOTAL', bold: true }, { text: '$10,248', bold: true } ],
+                ['TOTAL PARCIAL', this.totalParcial.toFixed(2)], 
+                ['IMPUESTO (VAT 19%)', this.totalImpuesto.toFixed(2)], 
+                [{ text: 'TOTAL', bold: true }, { text: `$${(this.totalParcial + this.totalImpuesto).toFixed(2)}`, bold: true }]
               ]
             }
           },
           {
-            text: 'METODO PAGO:Tarjta \n NUMERO:' +
-            this.metodoPago.numero + '\n TIPO: ' +
-            this.metodoPago.tipo,
+            text: `METODO PAGO: Tarjeta \n NUMERO: ${this.metodoPago.numero} \n TIPO: ${this.metodoPago.tipo}`,
           },
           {
             text: 'TÉRMINOS & Y CONDICIONES\nEl pago se realizará en un plazo de 7 días.',
@@ -155,13 +169,10 @@ export class PDFsPage implements OnInit {
         }
       };
       pdfMake.createPdf(docDefinition).download('Factura.pdf');
-    } else{
+    } else {
       console.log("No se ha encontrado la factura");
     }
-    
-
   }
-
 }
 
 function removeDuplicates(arr: any[], prop: string) {
@@ -169,5 +180,3 @@ function removeDuplicates(arr: any[], prop: string) {
     return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
   });
 }
-
-

@@ -1,7 +1,7 @@
 import { Component, OnInit,Output } from '@angular/core';
-import { addProduct } from 'src/app/RequestAPIs/Products/products.service';
+import { addProduct, getProducts } from 'src/app/RequestAPIs/Products/products.service';
 import { EventEmitter } from '@angular/core';
-
+import { descProducto } from '../../Interfaces/productoDescription.interface';
 @Component({
   selector: 'app-agregar-producto',
   templateUrl: './agregar-producto.component.html',
@@ -10,8 +10,10 @@ import { EventEmitter } from '@angular/core';
 export class AgregarProductoComponent  implements OnInit {
   @Output() addproductsvalidated: EventEmitter<boolean> = new EventEmitter<boolean>();
   error=false;
+  showbutton = false;
   errorMsg:string;
   counter = 0;
+  listaProductos: descProducto[] = [];
   form = {
     nombre: '',
     costo: '',
@@ -20,10 +22,16 @@ export class AgregarProductoComponent  implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.form.nombre = '';
     this.form.costo = '0';
     this.form.stock = '0';
+    this.listaProductos = await getProducts();
+    if(this.listaProductos.length > 0){
+      this.error = true;
+      this.errorMsg = "Ya hay productos guardados, desea guardar mas productos?";
+      this.showbutton=true;
+    }
   }
 
   onSubmit() {
@@ -47,6 +55,11 @@ export class AgregarProductoComponent  implements OnInit {
       this.error=true;
       this.errorMsg = "Ingrese al menos un producto";
     }
+  }
+
+
+  skip(){
+    this.addproductsvalidated.emit(true);
   }
 
 }

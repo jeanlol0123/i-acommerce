@@ -73,7 +73,7 @@ export class ProductosComponent implements OnInit {
 
 }
 
-interface productCarrito {
+export interface productCarrito {
   id: number,
   cantidad: number
 }

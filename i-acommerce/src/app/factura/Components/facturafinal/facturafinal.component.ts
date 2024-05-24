@@ -41,3 +41,12 @@ export class FacturafinalComponent implements OnInit {
     });
   }
 }
+
+
+
+interface finalProd{
+  nombre:string,
+  precio:number,
+  cantidad:number,
+
+}

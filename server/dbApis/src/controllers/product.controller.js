@@ -74,10 +74,17 @@ export const getProductsByFilter = async (req, res) => {
     try {
       const idFactura = req.params.idFactura; 
       const [rows] = await pool.query(`
-      SELECT pedidoproducto.idProducto, producto.nombre, pedidoproducto.cantidad
-        FROM pedidoproducto
-        INNER JOIN producto ON pedidoproducto.idProducto = producto.id
-        WHERE idFactura = ?;` , [idFactura]);
+      SELECT 
+      pedidoproducto.idProducto, 
+      producto.nombre, 
+      pedidoproducto.cantidad, 
+      producto.costo AS precio
+    FROM 
+      pedidoproducto
+    INNER JOIN 
+      producto ON pedidoproducto.idProducto = producto.id
+    WHERE 
+      idFactura = ?;` , [idFactura]);
       console.log(rows);
       res.status(200).json(rows);
     } catch (error) {
@@ -85,9 +92,3 @@ export const getProductsByFilter = async (req, res) => {
     }
 
 }
-/*
-tests:      SELECT pedidoproducto.idProducto, producto.nombre, pedidoproducto.cantidad
-FROM pedidoproducto
-INNER JOIN producto ON pedidoproducto.idProducto = producto.id WHERE idFactura = CxybapIiz8sQp3ZcakyD;
-
-*/
