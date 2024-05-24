@@ -24,9 +24,9 @@
   <form [formGroup]="form" (ngSubmit)="submit()" (keyup.enter)="submit()">
     <ion-item class="text-box-item">
       <ion-textarea formControlName="prompt" auto-grow="true" placeholder="Escribe un mensaje a tu IAchat..."></ion-textarea>
-      <ion-buttons slot="end">
-        <ion-button>
-          <ion-icon name="send"></ion-icon>
+      <ion-buttons slot="end" >
+        <ion-button (click)="submit()">
+          <ion-icon name="send" ></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-item>

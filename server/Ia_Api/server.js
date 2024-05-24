@@ -18,15 +18,7 @@ let history = [
   { role: 'user', content: 'hola, se conciso con el asistente' }
 ];
 
-async function chatWithAssistant(userInput) {
-  history.push({ role: 'user', content: userInput });
 
-  const response = await openai.createChatCompletion({
-    model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
-    messages: history,
-    temperature: 0.7,
-    stream: true
-  });
 
   let newMessage = { role: 'assistant', content: '' };
 
@@ -40,9 +32,5 @@ async function chatWithAssistant(userInput) {
   history.push(newMessage);
   console.log();
   return newMessage.content;
-}
 
-// Ejemplo de uso
-chatWithAssistant("¿Cuál es la capital de Francia?").then(response => {
-  console.log("Respuesta del asistente:", response);
-});
+
