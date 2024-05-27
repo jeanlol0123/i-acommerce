@@ -11,7 +11,7 @@ import ping from './src/routes/ping.js';
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:8100'
+    origin: 'https://gradually-aware-scorpion.ngrok-free.app'
 }));
   
 
