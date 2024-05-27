@@ -6,7 +6,7 @@ export async function getProducts(): Promise<descProducto[]>{
 
     let listaProductos : descProducto[] = [];
     try{
-        const response = await axios.get('http://localhost:3000/api/products');
+        const response = await axios.get('https://gradually-aware-scorpion.ngrok-free.app/api/products');
         if (response.data && Array.isArray(response.data)) {
             listaProductos = response.data;
             return listaProductos;
@@ -27,7 +27,7 @@ export async function postProduct(idFactura:string,idProducto:number,cantidad:nu
     }
 
     try{
-        const response = await axios.post('http://localhost:3000/api/orderDetail', data);
+        const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/orderDetail', data);
     } catch(err){
         throw err
     }
@@ -36,7 +36,7 @@ export async function postProduct(idFactura:string,idProducto:number,cantidad:nu
 export async function getFilterProducts(idFactura:string): Promise<producto[]>{
 
     try{
-        const response = await axios.get('http://localhost:3000/api/productsByInvoice/' + idFactura);
+        const response = await axios.get('https://gradually-aware-scorpion.ngrok-free.app/api/productsByInvoice/' + idFactura);
         if (response.data && Array.isArray(response.data)) {
             return response.data;
         } else {
@@ -55,7 +55,7 @@ export async function addProduct(nombre: string, costo: string, stock: string): 
     };
 
     try {
-        const response = await axios.post('http://localhost:3000/api/product', data);
+        const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/product', data);
         console.log("Respuesta del servidor" + response.status);
         return response.status === 201; 
     } catch (err) {

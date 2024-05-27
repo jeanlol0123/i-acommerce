@@ -30,8 +30,8 @@ export class FechasComponent implements OnInit {
       this.fechaVencimiento = slicingDates(this.fechaVencimiento);
 
       console.log("Id de Relacion: " + this.datosService.getRelacion());
-      const idFactura = await postInvoice(this.datosService.getRelacion(), this.fechaCreacion, this.fechaVencimiento);
-      this.datosService.setidFactura(idFactura as string);
+      const idFactura = await postInvoice(this.datosService.getRelacion(), this.fechaCreacion, this.fechaVencimiento,this.datosService);
+
       this.datesValidated.emit(true);
     } catch (error) {
 

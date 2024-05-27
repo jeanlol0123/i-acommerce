@@ -14,7 +14,7 @@ export async function postUser(nombre:string,apellido:string,direccion:string,te
         ciudad:ciudad
     }
         try {
-          const response = await axios.post('http://localhost:3000/api/person', data);
+          const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/person', data);
           user = {id:response.data.id,nombre:response.data.nombre,apellido:response.data.apellido,
             direccion:response.data.direccion,telefono:response.data.telefono,correo:response.data.correo,ciudad:response.data.ciudad}
           return user;
@@ -29,7 +29,7 @@ export async function postshipment(idRemitente:number,idDestinatario:number){
     idDest: idDestinatario
   }
   try {
-    const response = await axios.post('http://localhost:3000/api/shipment', data);
+    const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/shipment', data);
     console.log("Se ha creado la conexion de remitente y destinatario" + response.data.id);
     const id:number = response.data.id;
     return id;
