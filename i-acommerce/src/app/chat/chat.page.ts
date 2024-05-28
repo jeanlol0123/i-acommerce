@@ -52,7 +52,7 @@ export class ChatPage {
   }
 
   async chatWithAssistant(userInput: string): Promise<string> {
-    const response = await axios.post('http://localhost:1234/v1/chat/completions', {
+    const response = await axios.post('https://fine-concrete-mosquito.ngrok-free.app/v1/chat/completions', {
       model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
       messages: [
         { role: 'system', content: 'Eres un asistente virtual para una aplicación de facturación llamada Ceres. como asistente debes ser capaz de realizar las siguientes funciones. Proporcionar asistencia y responder preguntas relacionadas con el proceso de facturación. Debes de ser amigable, eficiente y capaz de comprender y procesar los comandos de texto ingresado por el usuario. garantizando la privacidad y seguridad de los datos del cliente. Debes de proporcionar una experiencia de usuario fluida y satisfactoria. RESPONDES EN ESPAÑOL, eres de colombia' },

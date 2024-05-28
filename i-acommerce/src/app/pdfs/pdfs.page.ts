@@ -6,6 +6,7 @@ import { DatosServiceService } from 'src/app/Services/datos-service.service';
 import { getFilterProducts } from 'src/app/RequestAPIs/Products/products.service';
 import { metodo } from '../factura/Interfaces/metodo.interface';
 import { calculoImpuesto, calculoImporte, impuesto } from '../factura/Utilities/calculos.class';
+import { DomSanitizer } from '@angular/platform-browser';
 
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
@@ -22,8 +23,9 @@ export class PDFsPage implements OnInit {
   productos: any[];
   error: string | undefined; 
   idFactura: string;
+  pdfDataUrl: string | null = null;
 
-  constructor(private datosService: DatosServiceService) { }
+  constructor(private datosService: DatosServiceService,public  sanitizer: DomSanitizer ) { }
 
   async ngOnInit() {
     try {
@@ -168,7 +170,13 @@ export class PDFsPage implements OnInit {
           columnGap: 20,
         }
       };
-      pdfMake.createPdf(docDefinition).download('Factura.pdf');
+      
+      // Crear el PDF y asignar la URL
+      const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+      pdfDocGenerator.getDataUrl((dataUrl: string) => {
+        this.pdfDataUrl = dataUrl;
+      });
+      pdfDocGenerator.download('Factura.pdf');
     } else {
       console.log("No se ha encontrado la factura");
     }

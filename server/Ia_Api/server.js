@@ -1,10 +1,9 @@
-
 import cors from 'cors';
 const { Configuration, OpenAIApi } = require('openai');
 
 // Configuración del cliente de OpenAI
 app.use(cors({
-  origin: 'http://localhost:8100'
+  origin: 'https://fine-concrete-mosquito.ngrok-free.app'
 }));
 
 const configuration = new Configuration({
@@ -18,7 +17,15 @@ let history = [
   { role: 'user', content: 'hola, se conciso con el asistente' }
 ];
 
+async function chatWithAssistant(userInput) {
+  history.push({ role: 'user', content: userInput });
 
+  const response = await openai.createChatCompletion({
+    model: 'lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF',
+    messages: history,
+    temperature: 0.7,
+    stream: true
+  });
 
   let newMessage = { role: 'assistant', content: '' };
 
@@ -32,5 +39,5 @@ let history = [
   history.push(newMessage);
   console.log();
   return newMessage.content;
-
+}
 
