@@ -6,14 +6,16 @@ export async function getProducts(): Promise<descProducto[]>{
 
     let listaProductos : descProducto[] = [];
     try{
-        const response = await axios.get('https://gradually-aware-scorpion.ngrok-free.app/api/products');
+        const response = await axios.get('https://iacommerceapi.azurewebsites.net/api/products');
         if (response.data && Array.isArray(response.data)) {
             listaProductos = response.data;
+            console.log(listaProductos);
             return listaProductos;
         } else {
             throw new Error("No se han encontrado productos");
         }
     } catch(err){
+        console.log("Ha ocurrido un error: ",err);
         throw err;
     }
 }
@@ -27,7 +29,7 @@ export async function postProduct(idFactura:string,idProducto:number,cantidad:nu
     }
 
     try{
-        const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/orderDetail', data);
+        const response = await axios.post('https://iacommerceapi.azurewebsites.net/api/orderDetail', data);
     } catch(err){
         throw err
     }
@@ -36,7 +38,7 @@ export async function postProduct(idFactura:string,idProducto:number,cantidad:nu
 export async function getFilterProducts(idFactura:string): Promise<producto[]>{
 
     try{
-        const response = await axios.get('https://gradually-aware-scorpion.ngrok-free.app/api/productsByInvoice/' + idFactura);
+        const response = await axios.get('https://iacommerceapi.azurewebsites.net/api/productsByInvoice/' + idFactura);
         if (response.data && Array.isArray(response.data)) {
             return response.data;
         } else {
@@ -55,7 +57,7 @@ export async function addProduct(nombre: string, costo: string, stock: string): 
     };
 
     try {
-        const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/product', data);
+        const response = await axios.post('https://iacommerceapi.azurewebsites.net/api/product', data);
         console.log("Respuesta del servidor" + response.status);
         return response.status === 201; 
     } catch (err) {

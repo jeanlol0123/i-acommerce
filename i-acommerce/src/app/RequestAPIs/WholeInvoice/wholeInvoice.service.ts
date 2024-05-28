@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function getWholeInvoice(factura: string): Promise<WholeInvoice[]> {
     try {
-        const response = await axios.get(`https://gradually-aware-scorpion.ngrok-free.app/api/wholeInvoice/` + factura);
+        const response = await axios.get(`https://iacommerceapi.azurewebsites.net/api/wholeInvoice/` + factura);
         if (response.data && Array.isArray(response.data)) {
             const dataArray = response.data;
             const invoices: WholeInvoice[] = dataArray.map((data, index) => ({

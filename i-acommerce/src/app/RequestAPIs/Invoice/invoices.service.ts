@@ -8,7 +8,7 @@ export async function postInvoice(idRelaciones:number,HoraCreacion:string,HoraVe
         fechaVencimiento: HoraVencimiento
     }
         try {
-          const response = await axios.post('https://gradually-aware-scorpion.ngrok-free.app/api/invoice', data);
+          const response = await axios.post('https://iacommerceapi.azurewebsites.net/api/invoice', data);
           let dataReceived = await datosService.setidFactura(response.data.id as string);
           return response.data.id;
         } catch (err) {

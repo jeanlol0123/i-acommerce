@@ -2,9 +2,13 @@ import {pool} from '../databases/dbConnection.js';
 
 export const getProducts = async (req, res) => {
     try{
+
         const [rows] = await pool.query('SELECT * FROM producto');
+        console.log('Se ha trigeado el get de productos');
         res.status(200).json(rows);
+        
     } catch(err){
+        console.log('Ha ocurrido un error'+err);
         res.status(500).json({ message: "Ocurrio un error al buscar productos",
         error: err.message});   
     }

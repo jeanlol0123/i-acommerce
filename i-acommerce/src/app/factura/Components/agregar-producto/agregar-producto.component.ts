@@ -27,6 +27,7 @@ export class AgregarProductoComponent  implements OnInit {
     this.form.costo = '0';
     this.form.stock = '0';
     this.listaProductos = await getProducts();
+    console.log(this.listaProductos);
     if(this.listaProductos.length > 0){
       this.error = true;
       this.errorMsg = "Ya hay productos guardados, desea guardar mas productos?";
