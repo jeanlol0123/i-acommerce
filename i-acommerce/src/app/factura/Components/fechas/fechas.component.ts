@@ -1,8 +1,7 @@
-import { Component, OnInit,Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { slicingDates } from '../../Utilities/utilities';
 import { DatosServiceService } from 'src/app/Services/datos-service.service';
 import { postInvoice } from 'src/app/RequestAPIs/Invoice/invoices.service';
-import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-fechas',
@@ -14,12 +13,19 @@ export class FechasComponent implements OnInit {
 
   fechaCreacion: string = '';
   fechaVencimiento: string = '';
+  fechaActual: string;
   error: boolean;
   errorMsg: string;
 
-  constructor(private datosService: DatosServiceService) { }
+  constructor(private datosService: DatosServiceService) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Asigna la fecha actual en formato ISO
+    this.fechaActual = new Date().toISOString();
+    // Inicializa fechaCreacion y fechaVencimiento con fechaActual
+    this.fechaCreacion = this.fechaActual;
+    this.fechaVencimiento = this.fechaActual;
+  }
 
   async submitDates() {
     this.error = false;
@@ -30,11 +36,15 @@ export class FechasComponent implements OnInit {
       this.fechaVencimiento = slicingDates(this.fechaVencimiento);
 
       console.log("Id de Relacion: " + this.datosService.getRelacion());
-      const idFactura = await postInvoice(this.datosService.getRelacion(), this.fechaCreacion, this.fechaVencimiento,this.datosService);
+      const idFactura = await postInvoice(
+        this.datosService.getRelacion(),
+        this.fechaCreacion,
+        this.fechaVencimiento,
+        this.datosService
+      );
 
       this.datesValidated.emit(true);
     } catch (error) {
-
       this.error = true;
       this.errorMsg = 'Ha ocurrido un error al crear las fechas de la factura';
     }

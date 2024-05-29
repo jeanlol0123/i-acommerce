@@ -1,5 +1,5 @@
 export function calculoImpuesto(valor:number){
-    return valor * 1.19;
+    return valor * 0.19;
 }
 
 export function impuesto(valor: number): number {

@@ -4,12 +4,22 @@
   <ion-label class="labelTime">
     Ingrese la fecha de creación de la factura
   </ion-label>
-  <ion-datetime locale="es-CO" class="datetime" [(ngModel)]="fechaCreacion"></ion-datetime>
+  <ion-datetime
+    locale="es-CO"
+    class="datetime"
+    [(ngModel)]="fechaCreacion"
+    [value]="fechaActual"
+  ></ion-datetime>
 
   <ion-label class="labelTime">
     Ingrese la fecha de vencimiento de la factura
   </ion-label>
-  <ion-datetime locale="es-CO" class="datetime" [(ngModel)]="fechaVencimiento"></ion-datetime>
+  <ion-datetime
+    locale="es-CO"
+    class="datetime"
+    [(ngModel)]="fechaVencimiento"
+    [value]="fechaActual"
+  ></ion-datetime>
 
   <ion-button (click)="submitDates()">Enviar Datos</ion-button>
 
